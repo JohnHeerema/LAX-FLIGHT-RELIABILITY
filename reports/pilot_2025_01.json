@@ -1,0 +1,148 @@
+{
+  "period": "2025-01",
+  "origin": "LAX",
+  "counts": {
+    "scheduled_flights": 15157,
+    "cancelled_flights": 158,
+    "diverted_flights": 41,
+    "completed_nondiverted_flights": 14958,
+    "arrival_delay_eligible_flights": 14958,
+    "arrivals_delayed_15_plus": 1934,
+    "missing_arrival_delay": 199,
+    "missing_arrival_delay_among_completed": 0,
+    "cancelled_with_recorded_departure_time": 11
+  },
+  "metrics": {
+    "cancellation_rate": 0.010424226430032327,
+    "diversion_rate": 0.0027050207824767434,
+    "arrival_delay_rate": 0.12929536034229175,
+    "p90_arrival_delay_minutes": 23.0
+  },
+  "date_min": "2025-01-01",
+  "date_max": "2025-01-31",
+  "reporting_airlines": [
+    "AA",
+    "AS",
+    "B6",
+    "DL",
+    "F9",
+    "G4",
+    "HA",
+    "MQ",
+    "NK",
+    "OO",
+    "UA",
+    "WN"
+  ],
+  "destination_airports": 87,
+  "missing_values": {
+    "Year": 0,
+    "Month": 0,
+    "DayOfWeek": 0,
+    "FlightDate": 0,
+    "Reporting_Airline": 0,
+    "DOT_ID_Reporting_Airline": 0,
+    "Flight_Number_Reporting_Airline": 0,
+    "Origin": 0,
+    "OriginAirportID": 0,
+    "Dest": 0,
+    "DestAirportID": 0,
+    "CRSDepTime": 0,
+    "DepTimeBlk": 0,
+    "DepTime": 147,
+    "DepDelay": 147,
+    "DepDel15": 147,
+    "ArrDelay": 199,
+    "ArrDelayMinutes": 199,
+    "ArrDel15": 199,
+    "Cancelled": 0,
+    "CancellationCode": 14999,
+    "Diverted": 0,
+    "Flights": 0,
+    "Distance": 0,
+    "CarrierDelay": 13223,
+    "WeatherDelay": 13223,
+    "NASDelay": 13223,
+    "SecurityDelay": 13223,
+    "LateAircraftDelay": 13223
+  },
+  "checks": [
+    {
+      "check": "Only LAX origins",
+      "passed": true
+    },
+    {
+      "check": "All 31 January dates are represented",
+      "passed": true
+    },
+    {
+      "check": "Flight identifiers are present",
+      "passed": true
+    },
+    {
+      "check": "No duplicate proposed flight keys",
+      "passed": true
+    },
+    {
+      "check": "Each record represents one flight",
+      "passed": true
+    },
+    {
+      "check": "Cancellation and diversion flags are complete and binary",
+      "passed": true
+    },
+    {
+      "check": "Cancellation and diversion flags do not overlap",
+      "passed": true
+    },
+    {
+      "check": "Scheduled departure times are valid local HHMM codes",
+      "passed": true
+    },
+    {
+      "check": "Completed flights have arrival-delay values",
+      "passed": true
+    },
+    {
+      "check": "Canceled and diverted records have no ordinary arrival delay",
+      "passed": true
+    },
+    {
+      "check": "Eligible arrival-delay fields are finite",
+      "passed": true
+    },
+    {
+      "check": "15-minute delay flags agree with delay minutes",
+      "passed": true
+    },
+    {
+      "check": "Early arrivals become zero only in the minutes-late field",
+      "passed": true
+    },
+    {
+      "check": "Cancellation codes agree with cancellation flags",
+      "passed": true
+    },
+    {
+      "check": "Cause fields are populated for qualifying delayed arrivals",
+      "passed": true
+    },
+    {
+      "check": "Outcome counts reconcile to all scheduled flights",
+      "passed": true
+    },
+    {
+      "check": "Python counts match a separate SQL calculation",
+      "passed": true
+    },
+    {
+      "check": "P90 matches Python statistics with inclusive interpolation",
+      "passed": true
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5"
+  }
+}

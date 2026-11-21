@@ -1,0 +1,13 @@
+example_outcome,FlightDate,Reporting_Airline,Flight_Number_Reporting_Airline,Origin,Dest,CRSDepTime,ArrDelay,ArrDel15,Cancelled,Diverted,CancellationCode
+on_time,2025-01-01,WN,102,LAX,SLC,0900,-10,0,0,0,
+on_time,2025-01-01,WN,1072,LAX,ABQ,1315,1,0,0,0,
+on_time,2025-01-01,WN,1081,LAX,HNL,0705,-27,0,0,0,
+delayed_15_plus,2025-01-01,WN,1854,LAX,LAS,1315,48,1,0,0,
+delayed_15_plus,2025-01-01,WN,2890,LAX,LAS,1950,53,1,0,0,
+delayed_15_plus,2025-01-01,WN,681,LAX,STL,1635,26,1,0,0,
+cancelled,2025-01-03,OO,5403,LAX,ASE,1236,,,1,0,C
+cancelled,2025-01-04,WN,4036,LAX,MCI,1735,,,1,0,B
+cancelled,2025-01-04,AA,1772,LAX,STL,1750,,,1,0,B
+diverted,2025-01-01,OO,3695,LAX,JAC,1035,,,0,1,
+diverted,2025-01-02,B6,688,LAX,BOS,1522,,,0,1,
+diverted,2025-01-03,OO,4099,LAX,RNO,0937,,,0,1,

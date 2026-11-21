@@ -4,7 +4,9 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** Project definition complete. First data download and validation are pending. Findings and recommendations will be added after analysis.
+**Status:** January 2025 pilot downloaded and inspected. Full-year validation and analysis are pending.
+
+**First checkpoint:** Read the [January pilot inspection](reports/pilot_2025_01.md) and explore [12 example flight records](data/samples/lax_2025_01_examples.csv). The pilot preserves cancellations and diversions and checks Python calculations against SQL. These are one-month observations; full-year recommendations will follow validated analysis.
 
 ## Purpose
 
@@ -43,7 +45,7 @@ Source documentation:
 
 Arrival-delay measures exclude canceled and diverted flights. Their rates will be shown alongside arrival delays, and missing arrival records will be reported separately. Each result will state its sample size and denominator.
 
-These definitions will be checked against the actual files before implementation. Any changes will be documented.
+These definitions have been checked on the January pilot. They will be validated again on the full-year dataset, with any changes documented.
 
 ## How results will be validated
 
@@ -61,7 +63,7 @@ Historical patterns describe associations. They do not establish that changing a
 ## Roadmap
 
 - [x] Create the repository and define the project.
-- [ ] Download one month as a pilot and inspect the records.
+- [x] Download one month as a pilot and inspect the records.
 - [ ] Build and validate the full-year LAX dataset.
 - [ ] Analyze reliability and investigate competing explanations.
 - [ ] Build an interactive dashboard and a concise findings report.
@@ -74,6 +76,33 @@ Historical patterns describe associations. They do not establish that changing a
 - An interactive dashboard for comparing historical reliability.
 - A short report with supported recommendations and limitations.
 - Instructions for reproducing the published results.
+
+## Run the January pilot
+
+Use Python 3.12. From a local copy of this repository:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python scripts/inspect_pilot.py
+```
+
+The activation command above is for macOS/Linux. On Windows, activate the environment with `.venv\Scripts\activate`.
+
+The script downloads the original 27 MB BTS ZIP, reads the national CSV in chunks, retains LAX departures, and writes a local extract to `data/interim/`. It regenerates the pilot report, JSON profile, and illustrative records. Original archives and full extracts stay outside Git; the [source manifest](data/manifests/pilot_2025_01.json) records the download and checksum.
+
+After the first download, repeat the inspection without network access:
+
+```bash
+python scripts/inspect_pilot.py --offline
+```
+
+Run the focused denominator and source-integrity tests:
+
+```bash
+python -m unittest discover -s tests -v
+```
 
 ## AI assistance
 

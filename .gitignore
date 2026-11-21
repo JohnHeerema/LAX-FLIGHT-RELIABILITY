@@ -221,3 +221,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Rebuild source archives and full flight extracts from the documented source.
+/data/raw/
+/data/interim/
+*.part
