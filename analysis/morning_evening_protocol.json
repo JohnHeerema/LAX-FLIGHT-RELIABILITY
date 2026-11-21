@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "question": "How does arrival-disruption frequency differ between morning and evening departures within comparable airline, destination, and month groups?",
+  "input_manifest": "data/manifests/year_2025.json",
+  "input_extract": "data/interim/lax_2025.csv",
+  "input_sha256": "7f2f81f09f73df41d4665d1f3d456818411420e80038eebaba75cc40e6cf92c6",
+  "year": 2025,
+  "origin": "LAX",
+  "windows": {
+    "morning": {"start_minute": 360, "end_minute": 600, "label": "6-10 a.m."},
+    "evening": {"start_minute": 1020, "end_minute": 1260, "label": "5-9 p.m."}
+  },
+  "window_bounds": "Start inclusive, end exclusive; scheduled local departure time. The 2400 code is midnight and outside both windows.",
+  "primary_outcome": "Cancelled == 1 OR Diverted == 1 OR completed arrival at least 15 minutes late",
+  "strata": ["DOT_ID_Reporting_Airline", "DestAirportID", "Month"],
+  "minimum_flights_per_window_per_stratum": 10,
+  "common_weight": "Combined morning-plus-evening scheduled flight count within each retained stratum, normalized to sum to one",
+  "contrast": "evening_rate - morning_rate",
+  "confidence_level": 0.95,
+  "cluster_anchor": "2024-12-30",
+  "primary_cluster_days": 7,
+  "interval_method": "CR1 cluster-robust variance for the common-weight contrast of stratum/window means; Student t critical value with G-1 degrees of freedom",
+  "sensitivity_checks": [
+    {"id": "minimum_5", "minimum": 5, "add_weekday": false, "cluster_days": 7},
+    {"id": "minimum_20", "minimum": 20, "add_weekday": false, "cluster_days": 7},
+    {"id": "match_weekday", "minimum": 3, "add_weekday": true, "cluster_days": 7},
+    {"id": "two_week_clusters", "minimum": 10, "add_weekday": false, "cluster_days": 14}
+  ],
+  "reporting": [
+    "Report unmatched full-window rates as descriptive context, followed by the primary common-mix contrast.",
+    "Report retained and excluded flight counts, stratum counts, and coverage of both time windows.",
+    "Show cancellation, diversion, and late-completion components per scheduled flight alongside the composite.",
+    "Show month-specific common-mix differences descriptively; do not interpret those points as separately confirmed effects.",
+    "Publish every specified sensitivity check, including results that disagree with the primary comparison.",
+    "Describe associations only; do not claim causation, a guaranteed future result, or financial savings."
+  ]
+}
