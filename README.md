@@ -4,9 +4,11 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** January 2025 pilot downloaded and inspected. Full-year validation and analysis are pending.
+**Status:** January 2025 pilot inspected and data-handling rules documented. Full-year validation and analysis are pending.
 
 **First checkpoint:** Read the [January pilot inspection](reports/pilot_2025_01.md) and explore [12 example flight records](data/samples/lax_2025_01_examples.csv). The pilot preserves cancellations and diversions and checks Python calculations against SQL. These are one-month observations; full-year recommendations will follow validated analysis.
+
+**Data rules:** [How records, missing values, and metric denominators will be handled](docs/data_handling.md). These rules were documented before downloading the remaining months.
 
 ## Purpose
 
@@ -64,6 +66,7 @@ Historical patterns describe associations. They do not establish that changing a
 
 - [x] Create the repository and define the project.
 - [x] Download one month as a pilot and inspect the records.
+- [x] Document data-handling rules before extending to the full year.
 - [ ] Build and validate the full-year LAX dataset.
 - [ ] Analyze reliability and investigate competing explanations.
 - [ ] Build an interactive dashboard and a concise findings report.
