@@ -1,0 +1,499 @@
+{
+  "protocol_version": "1.0",
+  "protocol_sha256": "f026161a423bb4ec9740b4f48ff997da81022c992d182e161e6ddda32717115f",
+  "protocol_commit": "30d7bfcbf696a162db70506ff1f668fc9bd8794c",
+  "input_sha256": "7f2f81f09f73df41d4665d1f3d456818411420e80038eebaba75cc40e6cf92c6",
+  "coverage": {
+    "source_flights": 190472,
+    "outside_windows": 101015,
+    "all_window_flights": 89457,
+    "retained_flights": 57464,
+    "retained_fraction_of_window_flights": 0.6423644879662854,
+    "excluded_window_flights": 31993,
+    "matched_reporting_airline_codes": [
+      "AA",
+      "AS",
+      "B6",
+      "DL",
+      "F9",
+      "HA",
+      "NK",
+      "OO",
+      "UA",
+      "WN"
+    ],
+    "matched_destination_airports": 46
+  },
+  "unadjusted_all_windows": {
+    "morning": {
+      "scheduled_flights": 55297,
+      "disruptions": 7393,
+      "rate": 0.13369622221820351
+    },
+    "evening": {
+      "scheduled_flights": 34160,
+      "disruptions": 7311,
+      "rate": 0.21402224824355973
+    }
+  },
+  "primary": {
+    "strata": [
+      "DOT_ID_Reporting_Airline",
+      "DestAirportID",
+      "Month"
+    ],
+    "minimum": 10,
+    "eligible_pairs": 706,
+    "n_morning": 31634,
+    "n_evening": 25830,
+    "components": {
+      "disrupted": {
+        "morning_rate": 0.11988243212550813,
+        "evening_rate": 0.21355859111945866,
+        "difference": 0.09367615899395053
+      },
+      "cancelled": {
+        "morning_rate": 0.00667280230892762,
+        "evening_rate": 0.0069464638856119405,
+        "difference": 0.00027366157668432065
+      },
+      "diverted": {
+        "morning_rate": 0.002401561434151754,
+        "evening_rate": 0.0009590715243994876,
+        "difference": -0.0014424899097522665
+      },
+      "late_completion": {
+        "morning_rate": 0.11080806838242876,
+        "evening_rate": 0.20565305570944722,
+        "difference": 0.09484498732701846
+      }
+    },
+    "standardized": {
+      "morning_rate": 0.11988243212550813,
+      "evening_rate": 0.21355859111945866,
+      "difference": 0.09367615899395053
+    },
+    "interval": {
+      "lower": 0.08341107215501173,
+      "upper": 0.10394124583288933,
+      "standard_error": 0.005115542412867836,
+      "clusters": 53,
+      "cluster_days": 7,
+      "residual_parameters": 1412,
+      "correction": 1.0448879200083439,
+      "degrees_of_freedom": 52
+    },
+    "unadjusted_retained": {
+      "morning": {
+        "scheduled_flights": 31634,
+        "disruptions": 3844,
+        "rate": 0.1215148258203199
+      },
+      "evening": {
+        "scheduled_flights": 25830,
+        "disruptions": 5547,
+        "rate": 0.21475029036004645
+      }
+    }
+  },
+  "sensitivities": [
+    {
+      "id": "minimum_5",
+      "strata": [
+        "DOT_ID_Reporting_Airline",
+        "DestAirportID",
+        "Month"
+      ],
+      "minimum": 5,
+      "eligible_pairs": 780,
+      "n_morning": 32935,
+      "n_evening": 27045,
+      "components": {
+        "disrupted": {
+          "morning_rate": 0.12041842424168793,
+          "evening_rate": 0.21371056885009507,
+          "difference": 0.09329214460840714
+        },
+        "cancelled": {
+          "morning_rate": 0.00659277986758569,
+          "evening_rate": 0.007316345561308011,
+          "difference": 0.0007235656937223207
+        },
+        "diverted": {
+          "morning_rate": 0.0024368904966565247,
+          "evening_rate": 0.0009188410483176419,
+          "difference": -0.0015180494483388828
+        },
+        "late_completion": {
+          "morning_rate": 0.1113887538774457,
+          "evening_rate": 0.20547538224046943,
+          "difference": 0.09408662836302373
+        }
+      },
+      "standardized": {
+        "morning_rate": 0.12041842424168793,
+        "evening_rate": 0.21371056885009507,
+        "difference": 0.09329214460840714
+      },
+      "interval": {
+        "lower": 0.083289437151298,
+        "upper": 0.10329485206551628,
+        "standard_error": 0.004984787273912734,
+        "clusters": 53,
+        "cluster_days": 7,
+        "residual_parameters": 1560,
+        "correction": 1.0464300292312958,
+        "degrees_of_freedom": 52
+      },
+      "unadjusted_retained": {
+        "morning": {
+          "scheduled_flights": 32935,
+          "disruptions": 4006,
+          "rate": 0.12163352057082132
+        },
+        "evening": {
+          "scheduled_flights": 27045,
+          "disruptions": 5814,
+          "rate": 0.21497504159733777
+        }
+      },
+      "retained_fraction_of_window_flights": 0.6704897324971774
+    },
+    {
+      "id": "minimum_20",
+      "strata": [
+        "DOT_ID_Reporting_Airline",
+        "DestAirportID",
+        "Month"
+      ],
+      "minimum": 20,
+      "eligible_pairs": 591,
+      "n_morning": 28362,
+      "n_evening": 23756,
+      "components": {
+        "disrupted": {
+          "morning_rate": 0.11823762831313454,
+          "evening_rate": 0.21346235642238118,
+          "difference": 0.09522472810924663
+        },
+        "cancelled": {
+          "morning_rate": 0.006276153876079338,
+          "evening_rate": 0.00666042590162944,
+          "difference": 0.0003842720255501017
+        },
+        "diverted": {
+          "morning_rate": 0.0024064579129423106,
+          "evening_rate": 0.0008960060342790791,
+          "difference": -0.0015104518786632315
+        },
+        "late_completion": {
+          "morning_rate": 0.10955501652411294,
+          "evening_rate": 0.20590592448647266,
+          "difference": 0.09635090796235972
+        }
+      },
+      "standardized": {
+        "morning_rate": 0.11823762831313454,
+        "evening_rate": 0.21346235642238118,
+        "difference": 0.09522472810924663
+      },
+      "interval": {
+        "lower": 0.08466863284360499,
+        "upper": 0.10578082337488828,
+        "standard_error": 0.005260564658919699,
+        "clusters": 53,
+        "cluster_days": 7,
+        "residual_parameters": 1182,
+        "correction": 1.0428626119051359,
+        "degrees_of_freedom": 52
+      },
+      "unadjusted_retained": {
+        "morning": {
+          "scheduled_flights": 28362,
+          "disruptions": 3395,
+          "rate": 0.11970241872928566
+        },
+        "evening": {
+          "scheduled_flights": 23756,
+          "disruptions": 5092,
+          "rate": 0.2143458494696077
+        }
+      },
+      "retained_fraction_of_window_flights": 0.5826039326156701
+    },
+    {
+      "id": "match_weekday",
+      "strata": [
+        "DOT_ID_Reporting_Airline",
+        "DestAirportID",
+        "Month",
+        "DayOfWeek"
+      ],
+      "minimum": 3,
+      "eligible_pairs": 4240,
+      "n_morning": 29002,
+      "n_evening": 24575,
+      "components": {
+        "disrupted": {
+          "morning_rate": 0.11840411317086577,
+          "evening_rate": 0.21308469334684144,
+          "difference": 0.09468058017597566
+        },
+        "cancelled": {
+          "morning_rate": 0.0065538731675663965,
+          "evening_rate": 0.0067662579057740715,
+          "difference": 0.00021238473820767503
+        },
+        "diverted": {
+          "morning_rate": 0.002534877769132354,
+          "evening_rate": 0.0009547485693966461,
+          "difference": -0.001580129199735708
+        },
+        "late_completion": {
+          "morning_rate": 0.10931536223416705,
+          "evening_rate": 0.20536368687167075,
+          "difference": 0.09604832463750371
+        }
+      },
+      "standardized": {
+        "morning_rate": 0.11840411317086577,
+        "evening_rate": 0.21308469334684144,
+        "difference": 0.09468058017597566
+      },
+      "interval": {
+        "lower": 0.0839707172837425,
+        "upper": 0.10539044306820883,
+        "standard_error": 0.005337193802725001,
+        "clusters": 53,
+        "cluster_days": 7,
+        "residual_parameters": 8480,
+        "correction": 1.210863420899565,
+        "degrees_of_freedom": 52
+      },
+      "unadjusted_retained": {
+        "morning": {
+          "scheduled_flights": 29002,
+          "disruptions": 3486,
+          "rate": 0.1201986069926212
+        },
+        "evening": {
+          "scheduled_flights": 24575,
+          "disruptions": 5277,
+          "rate": 0.21473041709053917
+        }
+      },
+      "retained_fraction_of_window_flights": 0.5989134444481706
+    },
+    {
+      "id": "two_week_clusters",
+      "strata": [
+        "DOT_ID_Reporting_Airline",
+        "DestAirportID",
+        "Month"
+      ],
+      "minimum": 10,
+      "eligible_pairs": 706,
+      "n_morning": 31634,
+      "n_evening": 25830,
+      "components": {
+        "disrupted": {
+          "morning_rate": 0.11988243212550813,
+          "evening_rate": 0.21355859111945866,
+          "difference": 0.09367615899395053
+        },
+        "cancelled": {
+          "morning_rate": 0.00667280230892762,
+          "evening_rate": 0.0069464638856119405,
+          "difference": 0.00027366157668432065
+        },
+        "diverted": {
+          "morning_rate": 0.002401561434151754,
+          "evening_rate": 0.0009590715243994876,
+          "difference": -0.0014424899097522665
+        },
+        "late_completion": {
+          "morning_rate": 0.11080806838242876,
+          "evening_rate": 0.20565305570944722,
+          "difference": 0.09484498732701846
+        }
+      },
+      "standardized": {
+        "morning_rate": 0.11988243212550813,
+        "evening_rate": 0.21355859111945866,
+        "difference": 0.09367615899395053
+      },
+      "interval": {
+        "lower": 0.0825010185061687,
+        "upper": 0.10485129948173236,
+        "standard_error": 0.005436623907055307,
+        "clusters": 27,
+        "cluster_days": 14,
+        "residual_parameters": 1412,
+        "correction": 1.0646027864235958,
+        "degrees_of_freedom": 26
+      },
+      "unadjusted_retained": {
+        "morning": {
+          "scheduled_flights": 31634,
+          "disruptions": 3844,
+          "rate": 0.1215148258203199
+        },
+        "evening": {
+          "scheduled_flights": 25830,
+          "disruptions": 5547,
+          "rate": 0.21475029036004645
+        }
+      },
+      "retained_fraction_of_window_flights": 0.6423644879662854
+    }
+  ],
+  "monthly": [
+    {
+      "month": "2025-01",
+      "eligible_pairs": 56,
+      "pooled_flights": 4316,
+      "morning_rate": 0.10816853159318555,
+      "evening_rate": 0.14790348504922224,
+      "difference": 0.039734953456036684
+    },
+    {
+      "month": "2025-02",
+      "eligible_pairs": 57,
+      "pooled_flights": 4282,
+      "morning_rate": 0.12765262860583507,
+      "evening_rate": 0.15846002881101084,
+      "difference": 0.030807400205175778
+    },
+    {
+      "month": "2025-03",
+      "eligible_pairs": 54,
+      "pooled_flights": 4749,
+      "morning_rate": 0.09902854761153453,
+      "evening_rate": 0.20287178948362888,
+      "difference": 0.10384324187209436
+    },
+    {
+      "month": "2025-04",
+      "eligible_pairs": 54,
+      "pooled_flights": 4661,
+      "morning_rate": 0.10086925750978468,
+      "evening_rate": 0.18166226802740426,
+      "difference": 0.08079301051761958
+    },
+    {
+      "month": "2025-05",
+      "eligible_pairs": 63,
+      "pooled_flights": 5246,
+      "morning_rate": 0.10254332314848076,
+      "evening_rate": 0.21036510412729822,
+      "difference": 0.10782178097881746
+    },
+    {
+      "month": "2025-06",
+      "eligible_pairs": 60,
+      "pooled_flights": 5159,
+      "morning_rate": 0.11606257439876747,
+      "evening_rate": 0.2509684473416363,
+      "difference": 0.13490587294286885
+    },
+    {
+      "month": "2025-07",
+      "eligible_pairs": 62,
+      "pooled_flights": 5403,
+      "morning_rate": 0.12828833109443621,
+      "evening_rate": 0.28270155519142237,
+      "difference": 0.15441322409698616
+    },
+    {
+      "month": "2025-08",
+      "eligible_pairs": 63,
+      "pooled_flights": 5231,
+      "morning_rate": 0.11660155013073566,
+      "evening_rate": 0.21338814696068273,
+      "difference": 0.09678659682994707
+    },
+    {
+      "month": "2025-09",
+      "eligible_pairs": 56,
+      "pooled_flights": 4499,
+      "morning_rate": 0.09734100250794789,
+      "evening_rate": 0.18675094615124838,
+      "difference": 0.08940994364330049
+    },
+    {
+      "month": "2025-10",
+      "eligible_pairs": 57,
+      "pooled_flights": 4694,
+      "morning_rate": 0.115708800872608,
+      "evening_rate": 0.2013667952859102,
+      "difference": 0.0856579944133022
+    },
+    {
+      "month": "2025-11",
+      "eligible_pairs": 58,
+      "pooled_flights": 4335,
+      "morning_rate": 0.1848397660896878,
+      "evening_rate": 0.2450980656439371,
+      "difference": 0.0602582995542493
+    },
+    {
+      "month": "2025-12",
+      "eligible_pairs": 66,
+      "pooled_flights": 4889,
+      "morning_rate": 0.14581174800126326,
+      "evening_rate": 0.2566962204546955,
+      "difference": 0.11088447245343222
+    }
+  ],
+  "validation": [
+    {
+      "check": "Common group weights are positive and sum to one",
+      "passed": true
+    },
+    {
+      "check": "Both windows meet the predeclared support rule",
+      "passed": true
+    },
+    {
+      "check": "Retained flight counts reconcile",
+      "passed": true
+    },
+    {
+      "check": "Morning disruption components reconcile",
+      "passed": true
+    },
+    {
+      "check": "Evening disruption components reconcile",
+      "passed": true
+    },
+    {
+      "check": "All 12 months support the primary comparison",
+      "passed": true
+    },
+    {
+      "check": "Monthly morning_rate reconciles to the annual contrast",
+      "passed": true
+    },
+    {
+      "check": "Monthly evening_rate reconciles to the annual contrast",
+      "passed": true
+    },
+    {
+      "check": "Monthly difference reconciles to the annual contrast",
+      "passed": true
+    },
+    {
+      "check": "Longer clustering changes uncertainty, not the primary point estimate",
+      "passed": true
+    }
+  ],
+  "sql_cross_check": {
+    "eligible_pairs": 706.0,
+    "n_morning": 31634.0,
+    "n_evening": 25830.0,
+    "disrupted_morning": 3844.0,
+    "disrupted_evening": 5547.0,
+    "morning_rate": 0.11988243212550814,
+    "evening_rate": 0.21355859111945869
+  }
+}

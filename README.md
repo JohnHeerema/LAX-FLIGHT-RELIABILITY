@@ -4,7 +4,15 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** The full-year 2025 dataset is built and validated. Comparative analysis and the dashboard are the next stage.
+**Status:** The first matched reliability comparison is complete. A route-specific planning view, dashboard, and final review are next.
+
+**First finding:** In comparable 2025 airline/destination/month groups, the disruption rate was **11.99%** for morning departures versus **21.36%** for evening departures: a **9.37-percentage-point gap** (approximate 95% week-cluster interval: **8.34–10.39 points**).
+
+Disruption means cancellation, diversion, or arrival at least 15 minutes late. The comparison covers **57,464 flights**, or **64.2% of flights in the selected windows**. It describes a historical association, not a causal effect or future-flight forecast.
+
+Read the [comparison and sensitivity checks](reports/morning_evening.md), including the [plan committed before the estimates](docs/morning_evening_plan.md).
+
+![Matched morning and evening flight reliability](reports/figures/morning_evening.svg)
 
 **Dataset checkpoint:** [190,472 LAX departures across all 365 days](reports/year_2025.md), with 12 reporting airline codes and 105 destination airports. Every month and the combined year pass the record checks. Four comparisons match published DOT figures, including national annual totals and December LAX departures.
 
@@ -37,7 +45,7 @@ Source documentation:
 - [Field definitions](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ)
 - [BTS explanation of on-time performance](https://www.bts.gov/explore-topics-and-geography/topics/airline-time-performance-and-causes-flight-delays)
 
-## Planned measures
+## Measures
 
 | Measure | Definition |
 | --- | --- |
@@ -46,6 +54,7 @@ Source documentation:
 | Diversion rate | Diverted flights divided by all reported scheduled flights in that group |
 | Arrival delay rate | Flights arriving at least 15 minutes late divided by completed, nondiverted flights with a recorded arrival delay |
 | 90th percentile arrival delay | A measure of longer delays: the value at or below which 90% of eligible arrival-delay observations fall; early arrivals count as zero minutes late |
+| Arrival disruption, first comparison | Cancellation, diversion, or completed arrival at least 15 minutes late, divided by scheduled flights in the selected comparison group |
 
 Arrival-delay measures exclude canceled and diverted flights. Their rates will be shown alongside arrival delays, and missing arrival records will be reported separately. Each result will state its sample size and denominator.
 
@@ -70,7 +79,8 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Download one month as a pilot and inspect the records.
 - [x] Document data-handling rules before extending to the full year.
 - [x] Build and validate the full-year LAX dataset.
-- [ ] Analyze reliability and investigate competing explanations.
+- [x] Complete the first matched reliability comparison and sensitivity checks.
+- [ ] Explore route-level differences for the planning dashboard.
 - [ ] Build an interactive dashboard and a concise findings report.
 - [ ] Add reproduction instructions and complete the final review.
 
@@ -126,6 +136,18 @@ python -m scripts.build_year --offline
 ```
 
 The command regenerates the [validation report](reports/year_2025.md), [JSON audit](reports/year_2025.json), [monthly summary](data/summary/2025_monthly.csv), and [carrier exposure table](data/summary/2025_carrier_month_counts.csv). A [standalone SQL query](sql/monthly_validation.sql) cross-checks monthly counts, and [documented DOT benchmarks](data/reference/dot_2025_benchmarks.json) provide checks against published totals. A failed data or reconciliation check stops the build before published outputs are replaced.
+
+## Reproduce the first comparison
+
+After building the validated year extract, update the pinned requirements and run:
+
+```bash
+python -m pip install -r requirements.txt
+python -m scripts.compare_departure_windows
+python -m unittest discover -s tests -v
+```
+
+The analysis verifies the input checksum, applies the precommitted protocol, checks Python's primary result with separate SQL, and regenerates the [report](reports/morning_evening.md), [JSON audit](reports/morning_evening.json), [matched group table](data/summary/morning_evening_pairs.csv), [monthly results](data/summary/morning_evening_monthly.csv), [sensitivity results](data/summary/morning_evening_sensitivity.csv), and standalone SVG figure.
 
 ## AI assistance
 

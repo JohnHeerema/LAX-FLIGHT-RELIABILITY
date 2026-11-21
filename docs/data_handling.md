@@ -84,6 +84,12 @@ Exactly 15 minutes late qualifies as delayed. Percentile calculations include el
 
 These numbers come from the [pilot inspection](../reports/pilot_2025_01.md) and [machine-readable profile](../reports/pilot_2025_01.json). The denominator and missingness rules are covered by the existing [focused tests](../tests/test_pilot.py).
 
+## Outcome added for the first comparison
+
+The [morning/evening protocol](morning_evening_plan.md), committed before estimating that comparison, adds an **arrival-disruption** outcome: a cancellation, diversion, or completed arrival at least 15 minutes late. Its denominator is all scheduled flights in the selected comparison group. The three components are also reported separately per scheduled flight, so their rates add to the composite.
+
+This is an analysis-specific addition. It preserves the earlier metric definitions and leaves ordinary arrival-delay blanks intact. It does not reinterpret a canceled flight as having an observed zero-minute arrival delay.
+
 ## Dates and times
 
 Preserve flight numbers, airline codes, and local HHMM time codes as text. Keep scheduled and actual values distinct. The pilot accepts valid HHMM codes and the special `2400` representation; the original code remains intact. Any later conversion of that value must be documented and tested before creating time buckets or timestamps.
