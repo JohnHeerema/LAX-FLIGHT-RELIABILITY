@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "analysis_type": "Follow-up exploration after the overall 15-minute result; specified before calculating destination summaries and the 60-minute comparison",
+  "base_protocol": "analysis/morning_evening_protocol.json",
+  "input_sha256": "7f2f81f09f73df41d4665d1f3d456818411420e80038eebaba75cc40e6cf92c6",
+  "threshold_minutes": [15, 60],
+  "cohort": "Keep the original minimum-10 airline/destination/month matching and the same flights for both thresholds",
+  "route_support": {
+    "minimum_flights_each_window": 100,
+    "minimum_months": 6,
+    "minimum_week_clusters": 20
+  },
+  "route_interval_family": "Both thresholds for every destination meeting the coverage rules; family size is 2 times the supported destination count",
+  "route_family_alpha": 0.05,
+  "route_interval_adjustment": "Bonferroni t critical value; existing conditional weekly CR1 variance",
+  "limited_coverage_policy": "Retain descriptive point estimates and counts; suppress displayed intervals and direction classifications",
+  "route_direction_labels": ["Higher evening rate", "Higher morning rate", "Uncertain direction", "Limited coverage"],
+  "report_examples": "Eight destinations with the largest retained flight counts, selected without using outcome rates",
+  "visualization_platform": "Tableau",
+  "tableau_sources": {
+    "overall_comparison_2025.csv": "One row per delay threshold; overall full-year matched comparison",
+    "destination_comparison_2025.csv": "One row per destination and threshold; fixed full-year scope",
+    "comparison_pairs_2025.csv": "One row per matched airline/destination/month/window; both threshold numerators are columns"
+  },
+  "tableau_filter_policy": "Use precomputed summaries only at their documented full-year scope. Use ratio-of-sums from the pair table for whole-month, airline, or destination filters; those filtered point estimates do not inherit the full-year summary intervals."
+}
