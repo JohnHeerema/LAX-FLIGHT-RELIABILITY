@@ -4,7 +4,9 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** January 2025 pilot inspected and data-handling rules documented. Full-year validation and analysis are pending.
+**Status:** The full-year 2025 dataset is built and validated. Comparative analysis and the dashboard are the next stage.
+
+**Dataset checkpoint:** [190,472 LAX departures across all 365 days](reports/year_2025.md), with 12 reporting airline codes and 105 destination airports. Every month and the combined year pass the record checks. Four comparisons match published DOT figures, including national annual totals and December LAX departures.
 
 **First checkpoint:** Read the [January pilot inspection](reports/pilot_2025_01.md) and explore [12 example flight records](data/samples/lax_2025_01_examples.csv). The pilot preserves cancellations and diversions and checks Python calculations against SQL. These are one-month observations; full-year recommendations will follow validated analysis.
 
@@ -47,7 +49,7 @@ Source documentation:
 
 Arrival-delay measures exclude canceled and diverted flights. Their rates will be shown alongside arrival delays, and missing arrival records will be reported separately. Each result will state its sample size and denominator.
 
-These definitions have been checked on the January pilot. They will be validated again on the full-year dataset, with any changes documented.
+These definitions have been checked on each month and on the full-year dataset. Any later changes will be documented before interpreting comparisons.
 
 ## How results will be validated
 
@@ -67,7 +69,7 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Create the repository and define the project.
 - [x] Download one month as a pilot and inspect the records.
 - [x] Document data-handling rules before extending to the full year.
-- [ ] Build and validate the full-year LAX dataset.
+- [x] Build and validate the full-year LAX dataset.
 - [ ] Analyze reliability and investigate competing explanations.
 - [ ] Build an interactive dashboard and a concise findings report.
 - [ ] Add reproduction instructions and complete the final review.
@@ -101,11 +103,29 @@ After the first download, repeat the inspection without network access:
 python scripts/inspect_pilot.py --offline
 ```
 
-Run the focused denominator and source-integrity tests:
+Run the focused calendar, filtering, denominator, source-integrity, and reference-matching tests:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+## Build the full-year dataset
+
+With the same environment and requirements, run from the repository root:
+
+```bash
+python -m scripts.build_year
+```
+
+The first run downloads about 355 MB of official monthly ZIPs. The files are read in chunks, and the combined LAX extract is saved locally as `data/interim/lax_2025.csv`. Source checksums, timestamps, and the extract checksum are recorded in the [year manifest](data/manifests/year_2025.json).
+
+To reproduce the build from cached archives:
+
+```bash
+python -m scripts.build_year --offline
+```
+
+The command regenerates the [validation report](reports/year_2025.md), [JSON audit](reports/year_2025.json), [monthly summary](data/summary/2025_monthly.csv), and [carrier exposure table](data/summary/2025_carrier_month_counts.csv). A [standalone SQL query](sql/monthly_validation.sql) cross-checks monthly counts, and [documented DOT benchmarks](data/reference/dot_2025_benchmarks.json) provide checks against published totals. A failed data or reconciliation check stops the build before published outputs are replaced.
 
 ## AI assistance
 

@@ -1,6 +1,6 @@
 # Data-handling rules — version 1
 
-**Checkpoint:** Rules documented after inspecting January 2025 and before downloading the remaining months. The January implementation and checks are in place; applying these rules to the full year is the next stage.
+**Checkpoint:** Rules documented after inspecting January 2025 and before downloading the remaining months. They have now been applied to each month and the combined year; see the [full-year validation report](../reports/year_2025.md).
 
 We define these rules before comparing airlines or departure times so an attractive result does not determine how we handle inconvenient records.
 
@@ -30,7 +30,7 @@ The proposed flight identifier consists of:
 - `DestAirportID`
 - `CRSDepTime`
 
-These fields are present and unique in January. Their suitability will be checked across the full year. A repeated identifier triggers review; it does not authorize keeping the first row and discarding the rest.
+These fields are present and unique in the validated full-year dataset. A repeated identifier in a future source revision triggers review; it does not authorize keeping the first row and discarding the rest.
 
 ## Classify outcomes using flags
 
@@ -99,7 +99,7 @@ Use the supplied BTS delay-minute fields. Do not subtract origin and destination
 - Reconcile monthly counts and the combined counts. Recalculate selected measures with separate Python and SQL logic.
 - Check selected totals against published BTS summaries using matching carrier coverage, flight direction, period, and denominator definitions.
 
-January's 18 checks passed. The full-year checks and reconciliation to external summaries are still pending. Matching Python and SQL calculations verifies logic on the same records; it does not independently establish source completeness.
+The 18 shared checks passed for every month and the combined year. Seven combination checks and four comparisons with published DOT figures also passed. Matching Python and SQL calculations verifies logic on the same records; published aggregates provide an additional comparison, without establishing that each individual source record is error-free.
 
 ## Interpretation and changes
 

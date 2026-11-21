@@ -1,0 +1,50 @@
+{
+  "document": {
+    "title": "Air Travel Consumer Report, February 2026",
+    "publisher": "U.S. Department of Transportation, Office of Aviation Consumer Protection",
+    "source_url": "https://www.transportation.gov/sites/dot.gov/files/2026-03/February%20%202026%20ATCR.pdf",
+    "downloaded_at_utc": "2026-11-21T18:01:12.162943+00:00",
+    "sha256": "1c06fd71d49e8e4b7b879721f83b8795dff3eb23d327bb080553337d90a83d53",
+    "bytes": 1505502,
+    "transcription_note": "Reference values were transcribed from the published tables and their column headings; page numbers below are printed PDF pages. These are reporting operating-carrier figures, not marketing-carrier networks."
+  },
+  "benchmarks": [
+    {
+      "id": "national_scheduled_flights",
+      "label": "2025 national scheduled flights",
+      "scope": "All reporting operating carriers, January-December 2025",
+      "table": "1D",
+      "printed_page": 10,
+      "expected": 7001619,
+      "unit": "flights"
+    },
+    {
+      "id": "national_cancelled_flights",
+      "label": "2025 national canceled flights",
+      "scope": "All reporting operating carriers, January-December 2025",
+      "table": "6C",
+      "printed_page": 31,
+      "expected": 102876,
+      "unit": "flights"
+    },
+    {
+      "id": "national_on_time_arrival_percent",
+      "label": "2025 national on-time arrival percentage",
+      "scope": "On-time arrivals divided by all scheduled flights; reporting operating carriers",
+      "table": "1D",
+      "printed_page": 10,
+      "expected": 76.34,
+      "round_decimals": 2,
+      "unit": "percent"
+    },
+    {
+      "id": "lax_december_scheduled_departures",
+      "label": "December 2025 scheduled LAX departures",
+      "scope": "Los Angeles (LAX), reported operations DEP column; reporting operating carriers",
+      "table": "5",
+      "printed_page": 25,
+      "expected": 16050,
+      "unit": "flights"
+    }
+  ]
+}

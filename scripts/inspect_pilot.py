@@ -106,10 +106,12 @@ def get_archive(root, offline=False):
     return path, receipt
 
 
-def load_lax(archive_path):
+def load_lax(archive_path, year=2025, month=1, include_national=False):
     """Read the national CSV in chunks and retain only flights originating at LAX."""
     parts = []
     source_rows = 0
+    national = {"scheduled_flights": 0, "cancelled_flights": 0, "diverted_flights": 0, "on_time_arrivals": 0}
+    national_airlines = set()
     with zipfile.ZipFile(archive_path) as archive:
         require(archive.testzip() is None, "Source archive failed its ZIP integrity check.")
         names = [name for name in archive.namelist() if name.lower().endswith(".csv")]
@@ -124,17 +126,26 @@ def load_lax(archive_path):
                 chunksize=100_000,
             )
             for chunk in reader:
-                require(((chunk["Year"] == 2025) & (chunk["Month"] == 1)).all(),
+                require(((chunk["Year"] == year) & (chunk["Month"] == month)).all(),
                         "Source CSV includes a different year or month.")
                 dates = pd.to_datetime(chunk["FlightDate"], format="%Y-%m-%d", errors="raise")
-                require((dates.notna() & dates.dt.year.eq(2025) & dates.dt.month.eq(1)).all(),
-                        "Source flight dates do not match January 2025.")
+                require((dates.notna() & dates.dt.year.eq(year) & dates.dt.month.eq(month)).all(),
+                        f"Source flight dates do not match {year}-{month:02d}.")
                 source_rows += len(chunk)
+                if include_national:
+                    national["scheduled_flights"] += len(chunk)
+                    national["cancelled_flights"] += int(chunk["Cancelled"].eq(1).sum())
+                    national["diverted_flights"] += int(chunk["Diverted"].eq(1).sum())
+                    national["on_time_arrivals"] += int((
+                        chunk["Cancelled"].eq(0) & chunk["Diverted"].eq(0)
+                        & chunk["ArrDelay"].lt(15)
+                    ).sum())
+                    national_airlines.update(chunk["Reporting_Airline"].dropna().tolist())
                 parts.append(chunk.loc[chunk["Origin"].eq("LAX"), COLUMNS].copy())
     require(bool(parts), "Source CSV contains no records.")
     frame = pd.concat(parts, ignore_index=True)
     require(not frame.empty, "No LAX flights found in the source CSV.")
-    return frame, {
+    info = {
         "csv_member": member,
         "csv_uncompressed_bytes": archive.getinfo(member).file_size,
         "source_rows": source_rows,
@@ -142,6 +153,10 @@ def load_lax(archive_path):
         "source_blank_header_columns": sum(not name for name in header),
         "selected_columns": COLUMNS,
     }
+    if include_national:
+        info["national_counts"] = national
+        info["national_reporting_airlines"] = sorted(national_airlines)
+    return frame, info
 
 
 def summarize(frame):
@@ -176,7 +191,7 @@ def summarize(frame):
     return counts, metrics
 
 
-def inspect(frame):
+def inspect(frame, year=2025, month=1):
     checks = []
 
     def check(name, condition):
@@ -186,9 +201,16 @@ def inspect(frame):
     eligible = completed & frame["ArrDelay"].notna()
     counts, metrics = summarize(frame)
     check("Only LAX origins", frame["Origin"].eq("LAX").all())
-    check("All 31 January dates are represented", set(frame["FlightDate"]) == {
-        f"2025-01-{day:02d}" for day in range(1, calendar.monthrange(2025, 1)[1] + 1)
-    })
+    if month is None:
+        expected_dates = set(pd.date_range(f"{year}-01-01", f"{year}-12-31").strftime("%Y-%m-%d"))
+        date_label = f"All {len(expected_dates)} calendar dates are represented"
+        period = str(year)
+    else:
+        days = calendar.monthrange(year, month)[1]
+        expected_dates = {f"{year}-{month:02d}-{day:02d}" for day in range(1, days + 1)}
+        date_label = f"All {days} {calendar.month_name[month]} dates are represented"
+        period = f"{year}-{month:02d}"
+    check(date_label, set(frame["FlightDate"]) == expected_dates)
     check("Flight identifiers are present", frame[FLIGHT_KEY].notna().all().all())
     check("No duplicate proposed flight keys", not frame.duplicated(FLIGHT_KEY).any())
     check("Each record represents one flight", frame["Flights"].eq(1).all())
@@ -242,9 +264,9 @@ def inspect(frame):
               metrics["p90_arrival_delay_minutes"],
           ))
     failures = [item["check"] for item in checks if not item["passed"]]
-    require(not failures, "Pilot checks need review: " + "; ".join(failures))
+    require(not failures, "Flight-data checks need review: " + "; ".join(failures))
     return {
-        "period": "2025-01", "origin": "LAX", "counts": counts, "metrics": metrics,
+        "period": period, "origin": "LAX", "counts": counts, "metrics": metrics,
         "date_min": frame["FlightDate"].min(), "date_max": frame["FlightDate"].max(),
         "reporting_airlines": sorted(frame["Reporting_Airline"].unique().tolist()),
         "destination_airports": int(frame["Dest"].nunique()),

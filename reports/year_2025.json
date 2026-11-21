@@ -1,0 +1,702 @@
+{
+  "year": 2025,
+  "annual": {
+    "period": "2025",
+    "origin": "LAX",
+    "counts": {
+      "scheduled_flights": 190472,
+      "cancelled_flights": 1315,
+      "diverted_flights": 579,
+      "completed_nondiverted_flights": 188578,
+      "arrival_delay_eligible_flights": 188578,
+      "arrivals_delayed_15_plus": 33123,
+      "missing_arrival_delay": 1894,
+      "missing_arrival_delay_among_completed": 0,
+      "cancelled_with_recorded_departure_time": 66
+    },
+    "metrics": {
+      "cancellation_rate": 0.006903901885841488,
+      "diversion_rate": 0.0030398168759712715,
+      "arrival_delay_rate": 0.17564615172501563,
+      "p90_arrival_delay_minutes": 35.0
+    },
+    "date_min": "2025-01-01",
+    "date_max": "2025-12-31",
+    "reporting_airlines": [
+      "AA",
+      "AS",
+      "B6",
+      "DL",
+      "F9",
+      "G4",
+      "HA",
+      "MQ",
+      "NK",
+      "OO",
+      "UA",
+      "WN"
+    ],
+    "destination_airports": 105,
+    "missing_values": {
+      "Year": 0,
+      "Month": 0,
+      "DayOfWeek": 0,
+      "FlightDate": 0,
+      "Reporting_Airline": 0,
+      "DOT_ID_Reporting_Airline": 0,
+      "Flight_Number_Reporting_Airline": 0,
+      "Origin": 0,
+      "OriginAirportID": 0,
+      "Dest": 0,
+      "DestAirportID": 0,
+      "CRSDepTime": 0,
+      "DepTimeBlk": 0,
+      "DepTime": 1249,
+      "DepDelay": 1253,
+      "DepDel15": 1253,
+      "ArrDelay": 1894,
+      "ArrDelayMinutes": 1894,
+      "ArrDel15": 1894,
+      "Cancelled": 0,
+      "CancellationCode": 189157,
+      "Diverted": 0,
+      "Flights": 0,
+      "Distance": 0,
+      "CarrierDelay": 157349,
+      "WeatherDelay": 157349,
+      "NASDelay": 157349,
+      "SecurityDelay": 157349,
+      "LateAircraftDelay": 157349
+    },
+    "checks": [
+      {
+        "check": "Only LAX origins",
+        "passed": true
+      },
+      {
+        "check": "All 365 calendar dates are represented",
+        "passed": true
+      },
+      {
+        "check": "Flight identifiers are present",
+        "passed": true
+      },
+      {
+        "check": "No duplicate proposed flight keys",
+        "passed": true
+      },
+      {
+        "check": "Each record represents one flight",
+        "passed": true
+      },
+      {
+        "check": "Cancellation and diversion flags are complete and binary",
+        "passed": true
+      },
+      {
+        "check": "Cancellation and diversion flags do not overlap",
+        "passed": true
+      },
+      {
+        "check": "Scheduled departure times are valid local HHMM codes",
+        "passed": true
+      },
+      {
+        "check": "Completed flights have arrival-delay values",
+        "passed": true
+      },
+      {
+        "check": "Canceled and diverted records have no ordinary arrival delay",
+        "passed": true
+      },
+      {
+        "check": "Eligible arrival-delay fields are finite",
+        "passed": true
+      },
+      {
+        "check": "15-minute delay flags agree with delay minutes",
+        "passed": true
+      },
+      {
+        "check": "Early arrivals become zero only in the minutes-late field",
+        "passed": true
+      },
+      {
+        "check": "Cancellation codes agree with cancellation flags",
+        "passed": true
+      },
+      {
+        "check": "Cause fields are populated for qualifying delayed arrivals",
+        "passed": true
+      },
+      {
+        "check": "Outcome counts reconcile to all scheduled flights",
+        "passed": true
+      },
+      {
+        "check": "Python counts match a separate SQL calculation",
+        "passed": true
+      },
+      {
+        "check": "P90 matches Python statistics with inclusive interpolation",
+        "passed": true
+      }
+    ],
+    "environment": {
+      "python": "3.12.14",
+      "pandas": "2.2.3",
+      "numpy": "2.3.5"
+    }
+  },
+  "monthly": [
+    {
+      "period": "2025-01",
+      "counts": {
+        "scheduled_flights": 15157,
+        "cancelled_flights": 158,
+        "diverted_flights": 41,
+        "completed_nondiverted_flights": 14958,
+        "arrival_delay_eligible_flights": 14958,
+        "arrivals_delayed_15_plus": 1934,
+        "missing_arrival_delay": 199,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 11
+      },
+      "metrics": {
+        "cancellation_rate": 0.010424226430032327,
+        "diversion_rate": 0.0027050207824767434,
+        "arrival_delay_rate": 0.12929536034229175,
+        "p90_arrival_delay_minutes": 23.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 87,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-02",
+      "counts": {
+        "scheduled_flights": 13788,
+        "cancelled_flights": 92,
+        "diverted_flights": 33,
+        "completed_nondiverted_flights": 13663,
+        "arrival_delay_eligible_flights": 13663,
+        "arrivals_delayed_15_plus": 2068,
+        "missing_arrival_delay": 125,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 6
+      },
+      "metrics": {
+        "cancellation_rate": 0.006672468813460981,
+        "diversion_rate": 0.002393385552654482,
+        "arrival_delay_rate": 0.15135768132913707,
+        "p90_arrival_delay_minutes": 29.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 81,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-03",
+      "counts": {
+        "scheduled_flights": 16213,
+        "cancelled_flights": 64,
+        "diverted_flights": 58,
+        "completed_nondiverted_flights": 16091,
+        "arrival_delay_eligible_flights": 16091,
+        "arrivals_delayed_15_plus": 2458,
+        "missing_arrival_delay": 122,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 3
+      },
+      "metrics": {
+        "cancellation_rate": 0.003947449577499537,
+        "diversion_rate": 0.003577376179608956,
+        "arrival_delay_rate": 0.15275619911751911,
+        "p90_arrival_delay_minutes": 29.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 84,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-04",
+      "counts": {
+        "scheduled_flights": 15737,
+        "cancelled_flights": 44,
+        "diverted_flights": 46,
+        "completed_nondiverted_flights": 15647,
+        "arrival_delay_eligible_flights": 15647,
+        "arrivals_delayed_15_plus": 2313,
+        "missing_arrival_delay": 90,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 3
+      },
+      "metrics": {
+        "cancellation_rate": 0.002795958568977569,
+        "diversion_rate": 0.0029230475948401856,
+        "arrival_delay_rate": 0.1478238639994887,
+        "p90_arrival_delay_minutes": 27.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 86,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-05",
+      "counts": {
+        "scheduled_flights": 16546,
+        "cancelled_flights": 58,
+        "diverted_flights": 43,
+        "completed_nondiverted_flights": 16445,
+        "arrival_delay_eligible_flights": 16445,
+        "arrivals_delayed_15_plus": 2828,
+        "missing_arrival_delay": 101,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 6
+      },
+      "metrics": {
+        "cancellation_rate": 0.0035053789435513117,
+        "diversion_rate": 0.0025988154236673516,
+        "arrival_delay_rate": 0.1719671632715111,
+        "p90_arrival_delay_minutes": 34.600000000000364
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 90,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-06",
+      "counts": {
+        "scheduled_flights": 16578,
+        "cancelled_flights": 97,
+        "diverted_flights": 77,
+        "completed_nondiverted_flights": 16404,
+        "arrival_delay_eligible_flights": 16404,
+        "arrivals_delayed_15_plus": 3464,
+        "missing_arrival_delay": 174,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 4
+      },
+      "metrics": {
+        "cancellation_rate": 0.005851128000965135,
+        "diversion_rate": 0.004644709856436241,
+        "arrival_delay_rate": 0.21116800780297487,
+        "p90_arrival_delay_minutes": 43.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 90,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-07",
+      "counts": {
+        "scheduled_flights": 17104,
+        "cancelled_flights": 205,
+        "diverted_flights": 96,
+        "completed_nondiverted_flights": 16803,
+        "arrival_delay_eligible_flights": 16803,
+        "arrivals_delayed_15_plus": 3773,
+        "missing_arrival_delay": 301,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 15
+      },
+      "metrics": {
+        "cancellation_rate": 0.011985500467726848,
+        "diversion_rate": 0.005612722170252572,
+        "arrival_delay_rate": 0.2245432363268464,
+        "p90_arrival_delay_minutes": 53.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 90,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-08",
+      "counts": {
+        "scheduled_flights": 16493,
+        "cancelled_flights": 88,
+        "diverted_flights": 52,
+        "completed_nondiverted_flights": 16353,
+        "arrival_delay_eligible_flights": 16353,
+        "arrivals_delayed_15_plus": 2854,
+        "missing_arrival_delay": 140,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 4
+      },
+      "metrics": {
+        "cancellation_rate": 0.005335596919905415,
+        "diversion_rate": 0.003152852725398654,
+        "arrival_delay_rate": 0.1745245520699566,
+        "p90_arrival_delay_minutes": 34.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 92,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-09",
+      "counts": {
+        "scheduled_flights": 15262,
+        "cancelled_flights": 43,
+        "diverted_flights": 38,
+        "completed_nondiverted_flights": 15181,
+        "arrival_delay_eligible_flights": 15181,
+        "arrivals_delayed_15_plus": 2158,
+        "missing_arrival_delay": 81,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 1
+      },
+      "metrics": {
+        "cancellation_rate": 0.0028174551172847596,
+        "diversion_rate": 0.002489844057135369,
+        "arrival_delay_rate": 0.14215137342731046,
+        "p90_arrival_delay_minutes": 25.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 83,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-10",
+      "counts": {
+        "scheduled_flights": 16122,
+        "cancelled_flights": 50,
+        "diverted_flights": 28,
+        "completed_nondiverted_flights": 16044,
+        "arrival_delay_eligible_flights": 16044,
+        "arrivals_delayed_15_plus": 2653,
+        "missing_arrival_delay": 78,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 2
+      },
+      "metrics": {
+        "cancellation_rate": 0.0031013521895546458,
+        "diversion_rate": 0.0017367572261506017,
+        "arrival_delay_rate": 0.16535776614310646,
+        "p90_arrival_delay_minutes": 32.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 85,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-11",
+      "counts": {
+        "scheduled_flights": 15422,
+        "cancelled_flights": 274,
+        "diverted_flights": 28,
+        "completed_nondiverted_flights": 15120,
+        "arrival_delay_eligible_flights": 15120,
+        "arrivals_delayed_15_plus": 3075,
+        "missing_arrival_delay": 302,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 2
+      },
+      "metrics": {
+        "cancellation_rate": 0.017766826611334458,
+        "diversion_rate": 0.001815588120866295,
+        "arrival_delay_rate": 0.20337301587301587,
+        "p90_arrival_delay_minutes": 41.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 83,
+      "checks_run": 18,
+      "checks_passed": 18
+    },
+    {
+      "period": "2025-12",
+      "counts": {
+        "scheduled_flights": 16050,
+        "cancelled_flights": 142,
+        "diverted_flights": 39,
+        "completed_nondiverted_flights": 15869,
+        "arrival_delay_eligible_flights": 15869,
+        "arrivals_delayed_15_plus": 3545,
+        "missing_arrival_delay": 181,
+        "missing_arrival_delay_among_completed": 0,
+        "cancelled_with_recorded_departure_time": 9
+      },
+      "metrics": {
+        "cancellation_rate": 0.00884735202492212,
+        "diversion_rate": 0.002429906542056075,
+        "arrival_delay_rate": 0.22339151805406768,
+        "p90_arrival_delay_minutes": 45.0
+      },
+      "reporting_airlines": [
+        "AA",
+        "AS",
+        "B6",
+        "DL",
+        "F9",
+        "G4",
+        "HA",
+        "MQ",
+        "NK",
+        "OO",
+        "UA",
+        "WN"
+      ],
+      "destination_airports": 89,
+      "checks_run": 18,
+      "checks_passed": 18
+    }
+  ],
+  "national_counts": {
+    "scheduled_flights": 7001619,
+    "cancelled_flights": 102876,
+    "diverted_flights": 19258,
+    "on_time_arrivals": 5344846
+  },
+  "national_reporting_airlines": [
+    "AA",
+    "AS",
+    "B6",
+    "DL",
+    "F9",
+    "G4",
+    "HA",
+    "MQ",
+    "NK",
+    "OH",
+    "OO",
+    "UA",
+    "WN",
+    "YX"
+  ],
+  "combination_checks": [
+    {
+      "check": "All 12 months appear in combined records",
+      "passed": true
+    },
+    {
+      "check": "Year values are consistently 2025",
+      "passed": true
+    },
+    {
+      "check": "LAX airport identifiers agree with the LAX code",
+      "passed": true
+    },
+    {
+      "check": "Monthly counts reconcile to annual counts",
+      "passed": true
+    },
+    {
+      "check": "Twelve distinct source archives were used",
+      "passed": true
+    },
+    {
+      "check": "National source row counts reconcile",
+      "passed": true
+    },
+    {
+      "check": "Monthly Python counts match the separate SQL query",
+      "passed": true
+    }
+  ],
+  "reference_document": {
+    "title": "Air Travel Consumer Report, February 2026",
+    "publisher": "U.S. Department of Transportation, Office of Aviation Consumer Protection",
+    "source_url": "https://www.transportation.gov/sites/dot.gov/files/2026-03/February%20%202026%20ATCR.pdf",
+    "downloaded_at_utc": "2026-11-21T18:01:12.162943+00:00",
+    "sha256": "1c06fd71d49e8e4b7b879721f83b8795dff3eb23d327bb080553337d90a83d53",
+    "bytes": 1505502,
+    "transcription_note": "Reference values were transcribed from the published tables and their column headings; page numbers below are printed PDF pages. These are reporting operating-carrier figures, not marketing-carrier networks."
+  },
+  "published_reconciliation": [
+    {
+      "id": "national_scheduled_flights",
+      "label": "2025 national scheduled flights",
+      "scope": "All reporting operating carriers, January-December 2025",
+      "table": "1D",
+      "printed_page": 10,
+      "expected": 7001619,
+      "unit": "flights",
+      "observed": 7001619,
+      "passed": true
+    },
+    {
+      "id": "national_cancelled_flights",
+      "label": "2025 national canceled flights",
+      "scope": "All reporting operating carriers, January-December 2025",
+      "table": "6C",
+      "printed_page": 31,
+      "expected": 102876,
+      "unit": "flights",
+      "observed": 102876,
+      "passed": true
+    },
+    {
+      "id": "national_on_time_arrival_percent",
+      "label": "2025 national on-time arrival percentage",
+      "scope": "On-time arrivals divided by all scheduled flights; reporting operating carriers",
+      "table": "1D",
+      "printed_page": 10,
+      "expected": 76.34,
+      "round_decimals": 2,
+      "unit": "percent",
+      "observed": 76.34,
+      "passed": true
+    },
+    {
+      "id": "lax_december_scheduled_departures",
+      "label": "December 2025 scheduled LAX departures",
+      "scope": "Los Angeles (LAX), reported operations DEP column; reporting operating carriers",
+      "table": "5",
+      "printed_page": 25,
+      "expected": 16050,
+      "unit": "flights",
+      "observed": 16050,
+      "passed": true
+    }
+  ]
+}
