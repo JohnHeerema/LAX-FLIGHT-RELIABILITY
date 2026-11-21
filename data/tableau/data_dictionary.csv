@@ -1,0 +1,63 @@
+Source File,Field,Data Type,Units,Meaning,Aggregation Guidance
+overall_comparison_2025.csv,Delay Threshold Minutes,Integer / dimension,Minutes,Delay Threshold Minutes,Select exactly one threshold before building summary marks.
+overall_comparison_2025.csv,Morning Disruption Rate,Decimal,Fraction 0-1; display as Percentage,Morning Disruption Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Evening Disruption Rate,Decimal,Fraction 0-1; display as Percentage,Evening Disruption Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Gap pp,Decimal,Percentage points; display as Number,Gap pp,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+overall_comparison_2025.csv,Gap Interval Lower pp,Decimal,Percentage points; display as Number,Gap Interval Lower pp; full-year model-based gap uncertainty; blank for limited destination coverage,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+overall_comparison_2025.csv,Gap Interval Upper pp,Decimal,Percentage points; display as Number,Gap Interval Upper pp; full-year model-based gap uncertainty; blank for limited destination coverage,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+overall_comparison_2025.csv,Morning Flights,Integer,Count or identifier,Morning Flights,SUM counts only in the pair source; summary counts require one threshold and one scope.
+overall_comparison_2025.csv,Evening Flights,Integer,Count or identifier,Evening Flights,SUM counts only in the pair source; summary counts require one threshold and one scope.
+overall_comparison_2025.csv,Matched Groups,Integer,Count or identifier,Matched Groups,SUM counts only in the pair source; summary counts require one threshold and one scope.
+overall_comparison_2025.csv,Window Coverage,Decimal,Fraction 0-1; display as Percentage,Window Coverage,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Week Clusters,Integer,Count or identifier,Week Clusters,SUM counts only in the pair source; summary counts require one threshold and one scope.
+overall_comparison_2025.csv,Comparison Period,Text / dimension,Label,Comparison Period,Use as a dimension or filter.
+overall_comparison_2025.csv,Interval Scope,Text / dimension,Label,Interval Scope,Use as a dimension or filter.
+overall_comparison_2025.csv,Morning Cancellation Rate,Decimal,Fraction 0-1; display as Percentage,Morning Cancellation Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Evening Cancellation Rate,Decimal,Fraction 0-1; display as Percentage,Evening Cancellation Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Morning Diversion Rate,Decimal,Fraction 0-1; display as Percentage,Morning Diversion Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Evening Diversion Rate,Decimal,Fraction 0-1; display as Percentage,Evening Diversion Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Morning Late Arrival Rate,Decimal,Fraction 0-1; display as Percentage,Morning Late Arrival Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+overall_comparison_2025.csv,Evening Late Arrival Rate,Decimal,Fraction 0-1; display as Percentage,Evening Late Arrival Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+destination_comparison_2025.csv,Destination Airport ID,Integer,Count or identifier,Destination Airport ID,Use as a dimension or sort field; do not total identifiers or family sizes.
+destination_comparison_2025.csv,Destination Code,Text / dimension,Label,Destination Code,Use as a dimension or filter.
+destination_comparison_2025.csv,Destination City,Text / dimension,Label,Destination City,Use as a dimension or filter.
+destination_comparison_2025.csv,Delay Threshold Minutes,Integer / dimension,Minutes,Delay Threshold Minutes,Select exactly one threshold before building summary marks.
+destination_comparison_2025.csv,Morning Disruption Rate,Decimal,Fraction 0-1; display as Percentage,Morning Disruption Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+destination_comparison_2025.csv,Evening Disruption Rate,Decimal,Fraction 0-1; display as Percentage,Evening Disruption Rate,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+destination_comparison_2025.csv,Gap pp,Decimal,Percentage points; display as Number,Gap pp,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+destination_comparison_2025.csv,Gap Interval Lower pp,Decimal,Percentage points; display as Number,Gap Interval Lower pp; full-year model-based gap uncertainty; blank for limited destination coverage,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+destination_comparison_2025.csv,Gap Interval Upper pp,Decimal,Percentage points; display as Number,Gap Interval Upper pp; full-year model-based gap uncertainty; blank for limited destination coverage,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+destination_comparison_2025.csv,Pointwise Lower pp,Decimal,Percentage points; display as Number,Pointwise Lower pp; full-year model-based gap uncertainty; blank for limited destination coverage,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+destination_comparison_2025.csv,Pointwise Upper pp,Decimal,Percentage points; display as Number,Pointwise Upper pp; full-year model-based gap uncertainty; blank for limited destination coverage,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+destination_comparison_2025.csv,Morning Flights,Integer,Count or identifier,Morning Flights,SUM counts only in the pair source; summary counts require one threshold and one scope.
+destination_comparison_2025.csv,Evening Flights,Integer,Count or identifier,Evening Flights,SUM counts only in the pair source; summary counts require one threshold and one scope.
+destination_comparison_2025.csv,Matched Groups,Integer,Count or identifier,Matched Groups,SUM counts only in the pair source; summary counts require one threshold and one scope.
+destination_comparison_2025.csv,Matched Months,Integer,Count or identifier,Matched Months,SUM counts only in the pair source; summary counts require one threshold and one scope.
+destination_comparison_2025.csv,Week Clusters,Integer,Count or identifier,Week Clusters,SUM counts only in the pair source; summary counts require one threshold and one scope.
+destination_comparison_2025.csv,Window Coverage,Decimal,Fraction 0-1; display as Percentage,Window Coverage,MIN at the documented summary row grain; never sum or average destinations to obtain an overall rate.
+destination_comparison_2025.csv,Coverage Supported,Decimal,Percentage points; display as Number,Coverage Supported,"MIN at the documented summary row grain. Bounds apply to the gap, not either window's rate."
+destination_comparison_2025.csv,Direction Evidence,Text / dimension,Label,Direction Evidence,Use as a dimension or filter.
+destination_comparison_2025.csv,Route Family Size,Integer,Count or identifier,Route Family Size,Use as a dimension or sort field; do not total identifiers or family sizes.
+destination_comparison_2025.csv,Comparison Period,Text / dimension,Label,Comparison Period,Use as a dimension or filter.
+destination_comparison_2025.csv,Interval Scope,Text / dimension,Label,Interval Scope,Use as a dimension or filter.
+comparison_pairs_2025.csv,Month,Date,First day of calendar month,Month,Whole-month filters preserve the matched groups.
+comparison_pairs_2025.csv,Airline DOT ID,Integer,Count or identifier,Airline DOT ID,Use as a dimension or sort field; do not total identifiers or family sizes.
+comparison_pairs_2025.csv,Airline Code,Text / dimension,Label,Airline Code,Use as a dimension or filter.
+comparison_pairs_2025.csv,Airline Name,Text / dimension,Label,Airline Name,Use as a dimension or filter.
+comparison_pairs_2025.csv,Destination Airport ID,Integer,Count or identifier,Destination Airport ID,Use as a dimension or sort field; do not total identifiers or family sizes.
+comparison_pairs_2025.csv,Destination Code,Text / dimension,Label,Destination Code,Use as a dimension or filter.
+comparison_pairs_2025.csv,Destination City,Text / dimension,Label,Destination City,Use as a dimension or filter.
+comparison_pairs_2025.csv,Departure Window,Text / dimension,Label,Departure Window,Use as a dimension or filter.
+comparison_pairs_2025.csv,Window Order,Integer,Count or identifier,Window Order,Use as a dimension or sort field; do not total identifiers or family sizes.
+comparison_pairs_2025.csv,Scheduled Flights,Integer,Count or identifier,Scheduled Flights (observed count; use weighted inputs for common-mix rates),SUM counts only in the pair source; summary counts require one threshold and one scope.
+comparison_pairs_2025.csv,Cancelled Flights,Integer,Count or identifier,Cancelled Flights (observed count; use weighted inputs for common-mix rates),SUM counts only in the pair source; summary counts require one threshold and one scope.
+comparison_pairs_2025.csv,Diverted Flights,Integer,Count or identifier,Diverted Flights (observed count; use weighted inputs for common-mix rates),SUM counts only in the pair source; summary counts require one threshold and one scope.
+comparison_pairs_2025.csv,Disruptions 15+,Integer,Count or identifier,Disruptions 15+ (observed count; use weighted inputs for common-mix rates),SUM counts only in the pair source; summary counts require one threshold and one scope.
+comparison_pairs_2025.csv,Disruptions 60+,Integer,Count or identifier,Disruptions 60+ (observed count; use weighted inputs for common-mix rates),SUM counts only in the pair source; summary counts require one threshold and one scope.
+comparison_pairs_2025.csv,Late Arrivals 15+,Integer,Count or identifier,Late Arrivals 15+ (observed count; use weighted inputs for common-mix rates),SUM counts only in the pair source; summary counts require one threshold and one scope.
+comparison_pairs_2025.csv,Late Arrivals 60+,Integer,Count or identifier,Late Arrivals 60+ (observed count; use weighted inputs for common-mix rates),SUM counts only in the pair source; summary counts require one threshold and one scope.
+comparison_pairs_2025.csv,Common Mix Denominator,Decimal,"Standardization input, not an observed event count",Common Mix Denominator,SUM within each departure window; divide weighted event sums by common-mix denominator sums.
+comparison_pairs_2025.csv,Weighted Disruptions 15+,Decimal,"Standardization input, not an observed event count",Weighted Disruptions 15+,SUM within each departure window; divide weighted event sums by common-mix denominator sums.
+comparison_pairs_2025.csv,Weighted Disruptions 60+,Decimal,"Standardization input, not an observed event count",Weighted Disruptions 60+,SUM within each departure window; divide weighted event sums by common-mix denominator sums.
+comparison_pairs_2025.csv,Weighted Cancellations,Decimal,"Standardization input, not an observed event count",Weighted Cancellations,SUM within each departure window; divide weighted event sums by common-mix denominator sums.
+comparison_pairs_2025.csv,Weighted Diversions,Decimal,"Standardization input, not an observed event count",Weighted Diversions,SUM within each departure window; divide weighted event sums by common-mix denominator sums.

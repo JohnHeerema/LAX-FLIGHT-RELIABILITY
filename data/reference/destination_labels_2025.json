@@ -1,0 +1,12 @@
+{
+  "source_manifest": "data/manifests/year_2025.json",
+  "source_manifest_sha256": "bb2aa0dc52f00e9d6aee9629f0bcfc6dfe724ba9ac1184287cb388414c940573",
+  "filter": "Origin == LAX, all 12 pinned monthly archives",
+  "source_columns": [
+    "DestAirportID",
+    "Dest",
+    "DestCityName"
+  ],
+  "rows": 105,
+  "csv_sha256": "94f1ee058ca98bafb5a603931631b23afa8023a5910c455e5d60a289b9baa7f4"
+}

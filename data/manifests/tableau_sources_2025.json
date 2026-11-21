@@ -1,0 +1,97 @@
+{
+  "input_sha256": "7f2f81f09f73df41d4665d1f3d456818411420e80038eebaba75cc40e6cf92c6",
+  "followup_plan_commit": "70e67397c463a17dc376261a3027e20579afae4d",
+  "visualization_platform": "Tableau",
+  "files": [
+    {
+      "path": "data/tableau/overall_comparison_2025.csv",
+      "rows": 2,
+      "columns": 19,
+      "sha256": "a74ec9a683282e353f9ef84046f23233155bebe83b06cae67318b49fe440c96a"
+    },
+    {
+      "path": "data/tableau/destination_comparison_2025.csv",
+      "rows": 92,
+      "columns": 22,
+      "sha256": "b738b9b81f9bf368681804ebff611dbbcf9aa17ff5b641dcd9f54d3b77fd5b33"
+    },
+    {
+      "path": "data/tableau/comparison_pairs_2025.csv",
+      "rows": 1412,
+      "columns": 21,
+      "sha256": "5fc89626073d01265ffec6911221dd8749a1c260fa71ed9c8020d10e4a25398e"
+    },
+    {
+      "path": "data/tableau/data_dictionary.csv",
+      "rows": 62,
+      "columns": 6,
+      "sha256": "77c40600d43cc016f80fd70feb45339fe36ee7ca7f80e048ca734224b9eeab80"
+    }
+  ],
+  "validation": [
+    {
+      "check": "Overall rows are unique by threshold",
+      "passed": true
+    },
+    {
+      "check": "Destination rows are unique by destination and threshold",
+      "passed": true
+    },
+    {
+      "check": "Pair rows have one unique group/window key",
+      "passed": true
+    },
+    {
+      "check": "Pair counts do not duplicate thresholds",
+      "passed": true
+    },
+    {
+      "check": "Display labels are complete",
+      "passed": true
+    },
+    {
+      "check": "Higher-threshold event counts are nested",
+      "passed": true
+    },
+    {
+      "check": "Rate fields are fractions, not percentage-point values",
+      "passed": true
+    },
+    {
+      "check": "Gap fields use percentage-point units",
+      "passed": true
+    },
+    {
+      "check": "Limited coverage retains points but suppresses intervals",
+      "passed": true
+    },
+    {
+      "check": "Tableau ratio-of-sums reproduces overall morning at 15 minutes",
+      "passed": true
+    },
+    {
+      "check": "Tableau ratio-of-sums reproduces overall evening at 15 minutes",
+      "passed": true
+    },
+    {
+      "check": "Every destination filter reproduces both 15-minute rates",
+      "passed": true
+    },
+    {
+      "check": "Tableau ratio-of-sums reproduces overall morning at 60 minutes",
+      "passed": true
+    },
+    {
+      "check": "Tableau ratio-of-sums reproduces overall evening at 60 minutes",
+      "passed": true
+    },
+    {
+      "check": "Every destination filter reproduces both 60-minute rates",
+      "passed": true
+    },
+    {
+      "check": "Whole-month filters reproduce the original monthly comparisons",
+      "passed": true
+    }
+  ]
+}

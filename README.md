@@ -4,7 +4,9 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** The first matched reliability comparison is complete. A route-specific planning view, dashboard, and final review are next.
+**Status:** The matched comparisons, destination/severity follow-up, and Tableau input tables are complete. Tableau authoring and final review are next.
+
+**Visualization platform:** The final dashboard or story will be built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
 
 **First finding:** In comparable 2025 airline/destination/month groups, the disruption rate was **11.99%** for morning departures versus **21.36%** for evening departures: a **9.37-percentage-point gap** (approximate 95% week-cluster interval: **8.34–10.39 points**).
 
@@ -80,8 +82,9 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Document data-handling rules before extending to the full year.
 - [x] Build and validate the full-year LAX dataset.
 - [x] Complete the first matched reliability comparison and sensitivity checks.
-- [ ] Explore route-level differences for the planning dashboard.
-- [ ] Build an interactive dashboard and a concise findings report.
+- [x] Explore destination differences and the 60-minute delay threshold.
+- [x] Prepare validated Tableau sources with documented row grains and calculations.
+- [ ] Build the Tableau dashboard or story and complete its visual checks.
 - [ ] Add reproduction instructions and complete the final review.
 
 ## Planned deliverables
@@ -148,6 +151,16 @@ python -m unittest discover -s tests -v
 ```
 
 The analysis verifies the input checksum, applies the precommitted protocol, checks Python's primary result with separate SQL, and regenerates the [report](reports/morning_evening.md), [JSON audit](reports/morning_evening.json), [matched group table](data/summary/morning_evening_pairs.csv), [monthly results](data/summary/morning_evening_monthly.csv), [sensitivity results](data/summary/morning_evening_sensitivity.csv), and standalone SVG figure.
+
+## Prepare the Tableau sources
+
+The [destination/severity follow-up](reports/route_severity.md) compares the 15- and 60-minute definitions on the same matched flights and labels destination coverage and uncertainty. Its [plan](docs/route_severity_plan.md) was committed before the extension estimates.
+
+```bash
+python -m scripts.route_severity
+```
+
+The command regenerates the [overall](data/tableau/overall_comparison_2025.csv), [destination](data/tableau/destination_comparison_2025.csv), and [pair-level](data/tableau/comparison_pairs_2025.csv) CSVs, their [dictionary](data/tableau/data_dictionary.csv), a [checksum manifest](data/manifests/tableau_sources_2025.json), and the [follow-up audit](reports/route_severity.json). The [Tableau guide](docs/tableau_data_guide.md) starts with one small connection and documents the correct aggregation rules.
 
 ## AI assistance
 
