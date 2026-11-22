@@ -4,11 +4,11 @@
 
 **[Explore the interactive Tableau dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes)** · [Read the findings](reports/morning_evening.md) · [Published-view review](reports/tableau_public_review.md)
 
-For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
+Were LAX morning flights more reliable than evening flights in 2025, after comparing the same airline, destination, and month mix?
 
 **Status:** The three-view dashboard is published on Tableau Public. A signed-out desktop browser review confirmed the opening 15-minute view, live switching to 60 minutes, both sets of headline values, all eight destination gaps, dynamic titles, the revised axis label, and the interpretation/source notes. One shared selector controls all three views.
 
-**Audited authoring checkpoint 03:** [Download the packaged workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) or read the [data and configuration audit](reports/tableau_checkpoint_03.md). This preserved checkpoint predates the published font, axis-title, and explanatory-note updates; the [published-view review](reports/tableau_public_review.md) records the later presentation changes. Archiving the final packaged revision remains a separate step.
+**Final Tableau workbook:** [Download the packaged workbook](tableau/LAX_Flight_Reliability_Final.twbx) or read its [data and configuration audit](reports/tableau_final.md). All **2,062 embedded values** agree with the validated CSVs. The archive includes the published font, axis-title, explanatory-note, and opening-filter settings. The earlier [authoring checkpoint 03](reports/tableau_checkpoint_03.md) remains preserved.
 
 **Visualization platform:** The dashboard is built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
 
@@ -92,7 +92,7 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Combine the rates and live gap/interval summary into a verified Tableau overview dashboard.
 - [x] Add destination gaps, adjusted intervals, and source/methods notes; verify both thresholds.
 - [x] Publish the Tableau dashboard and verify its presentation and selector in a desktop browser.
-- [ ] Archive the final packaged workbook matching the published presentation.
+- [x] Archive and audit the final packaged workbook with the published presentation updates.
 - [ ] Add reproduction instructions and complete the final review.
 
 ## Planned deliverables
@@ -172,17 +172,17 @@ The command regenerates the [overall](data/tableau/overall_comparison_2025.csv),
 
 ## Inspect the native Tableau checkpoint
 
-The current [three-view workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) contains the overall comparison, a live gap/interval card, and destination gaps with adjusted intervals. Its [audit](reports/tableau_checkpoint_03.md) verifies both embedded datasets, cross-source filter mapping, live values, interval geometry, units, colors, and saved desktop layout. All **2,062 embedded values** agree with the validated CSVs. The earlier [single-worksheet](reports/tableau_checkpoint_01.md) and [two-view overview](reports/tableau_checkpoint_02.md) checkpoints remain available.
+The [final three-view workbook](tableau/LAX_Flight_Reliability_Final.twbx) contains the overall comparison, a live gap/interval card, and destination gaps with adjusted intervals. Its [audit](reports/tableau_final.md) verifies both embedded datasets, cross-source filter mapping, live values, interval geometry, units, colors, the Arial title setting, interpretation note, and saved desktop layout. All **2,062 embedded values** agree with the validated CSVs. The earlier [single-worksheet](reports/tableau_checkpoint_01.md), [two-view overview](reports/tableau_checkpoint_02.md), and [three-view authoring](reports/tableau_checkpoint_03.md) checkpoints remain available.
 
 To repeat the latest inspection without downloading the raw flight archives:
 
 ```bash
 python -m pip install -r requirements-tableau.txt
-python -m scripts.inspect_tableau_workbook --workbook tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx
+python -m scripts.inspect_tableau_workbook --workbook tableau/LAX_Flight_Reliability_Final.twbx
 python -m unittest discover -s tests -p test_tableau_checkpoint.py -v
 ```
 
-The command regenerates the [checkpoint 03 JSON audit](reports/tableau_checkpoint_03.json). Inspection queries temporary copies of the embedded extracts and leaves the packaged workbook unchanged. It checks data and saved configuration; screenshots at both thresholds were reviewed separately during authoring. The desktop dashboard uses automatic sizing. Other viewport sizes and the auto-generated phone layout still need visual review.
+The command regenerates the [final JSON audit](reports/tableau_final.json). The final filename selects the final-presentation checks automatically; use `--final` to enforce those checks on a renamed copy. Inspection queries temporary copies of the embedded extracts and leaves the packaged workbook unchanged. The [public desktop review](reports/tableau_public_review.md) separately exercised live switching at both thresholds. The native desktop dashboard uses automatic sizing. Other viewport sizes and the auto-generated phone layout still need visual review.
 
 Regression checks include the authoring bug where a shared 15-minute selection conflicted with a local 60-minute filter and removed the destination marks. The current workbook uses one shared threshold group mapped across the two sources, with no competing local threshold filter. Earlier checkpoints can be inspected by passing their paths to the same command.
 

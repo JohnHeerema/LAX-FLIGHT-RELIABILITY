@@ -151,3 +151,28 @@ class TableauDestinationDashboardFailureTests(unittest.TestCase):
                 writer.writerows(rows)
             with self.assertRaisesRegex(ValueError, "Extract differs from validated CSV: destination_comparison_2025, Gap pp"):
                 inspect(ROOT / "tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx", overall)
+
+
+@unittest.skipUnless(HAS_HYPER, "Install requirements-tableau.txt to inspect native Tableau data")
+class TableauFinalWorkbookFailureTests(unittest.TestCase):
+    def test_previous_checkpoint_cannot_pass_as_the_final_presentation(self):
+        workbook = ROOT / "tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx"
+        with self.assertRaisesRegex(ValueError, "Final workbook opens at the primary 15-minute threshold"):
+            inspect(workbook, final=True)
+
+    def test_reversed_direction_explanation_is_rejected(self):
+        workbook = ROOT / "tableau/LAX_Flight_Reliability_Final.twbx"
+        with tempfile.TemporaryDirectory(prefix="lax-final-test-") as directory:
+            altered = Path(directory) / "renamed-workbook.twbx"
+            with zipfile.ZipFile(workbook) as source, zipfile.ZipFile(altered, "w", zipfile.ZIP_DEFLATED) as target:
+                for info in source.infolist():
+                    content = source.read(info.filename)
+                    if info.filename.endswith(".twb"):
+                        root = ET.fromstring(content)
+                        for run in root.findall("./dashboards/dashboard/zones//zone[@type-v2='text']/formatted-text/run"):
+                            if (run.text or "").startswith("Positive values"):
+                                run.text = run.text.replace("higher evening disruption rates", "higher morning disruption rates")
+                        content = ET.tostring(root, encoding="utf-8", xml_declaration=True)
+                    target.writestr(info, content)
+            with self.assertRaisesRegex(ValueError, "Final interpretation note explains both signs and uncertain direction"):
+                inspect(altered, final=True)

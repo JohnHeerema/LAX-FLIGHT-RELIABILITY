@@ -37,8 +37,10 @@ Destination uncertainty uses adjusted family intervals; the overall gap card use
 - The added note is visible: **Positive values mean higher evening disruption rates; negative values mean higher morning rates. Gray dots indicate uncertain direction.**
 - The source footer states the 2025 domestic LAX scope, 57,464 matched scheduled flights, 64.2% coverage of the selected departure windows, interpretation limits, and GitHub methods link.
 
-## Scope and remaining archive step
+## Archive and review scope
 
-This review exercised the live public interface and compared displayed rounded values. It is separate from the [checkpoint 03 audit](tableau_checkpoint_03.md), which directly queried both embedded Hyper extracts and checked every value against the CSVs. The archived checkpoint has not been replaced or relabeled as the newer published workbook. The final packaged revision still needs to be archived to preserve the exact presentation now online.
+This review exercised the live public interface and compared displayed rounded values. The later [final packaged workbook](../tableau/LAX_Flight_Reliability_Final.twbx) is now archived unchanged from the author's upload. Its [final audit](tableau_final.md) directly queries both embedded Hyper extracts, compares every value with the validated CSVs, and verifies the saved presentation settings visible in this review. Both extracts are byte-identical to the earlier [checkpoint 03](tableau_checkpoint_03.md); all earlier checkpoint files and audits remain preserved.
+
+The uploaded archive contains the reviewed presentation updates. This is a comparison of saved settings and observed public behavior, rather than proof of byte identity with a workbook downloaded from the Tableau server.
 
 The review covers one desktop browser display. It does not certify arbitrary viewport sizes, mobile layouts, or accessibility compliance. Some presentation details remain small: the destination header is abbreviated, the explanatory note uses a serif font in this browser, and the interval lines are pale. The main titles, numeric labels, interpretation note, and source text were readable at the reviewed desktop size.

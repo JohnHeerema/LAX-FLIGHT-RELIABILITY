@@ -1,4 +1,4 @@
-"""Audit checkpoint 03 using saved Tableau configuration and embedded-data SQL.
+"""Audit checkpoint 03 and the final workbook with configuration and embedded SQL.
 
 This is a configuration audit for this authored workbook, not a Tableau renderer
 or a general interpreter for arbitrary Tableau calculations and filter syntax.
@@ -25,7 +25,7 @@ def text(node):
     return "" if node is None else "".join(run.text or "" for run in node.findall("./run")).replace("Æ", "").strip()
 
 
-def inspect(workbook, expected_overall_csv, expected_destination_csv):
+def inspect(workbook, expected_overall_csv, expected_destination_csv, *, final=False):
     checks = []
 
     def check(description, condition):
@@ -83,6 +83,15 @@ def inspect(workbook, expected_overall_csv, expected_destination_csv):
             check(f"{name} uses the correct primary data source", primary is not None
                   and primary.get("name") == (destination if name == "Destination Gaps" else overall).get("name"))
         check("All three threshold filters share one group and saved selection", len(set(groups)) == len(set(selections)) == 1)
+        if final:
+            check("Final workbook opens at the primary 15-minute threshold", selections[0] == 15)
+            title_family = root.find("./style/style-rule[@element='title']/format[@attr='font-family']")
+            check("Final worksheet titles inherit Arial without conflicting overrides", title_family is not None
+                  and title_family.get("value") == "Arial"
+                  and all(run.get("fontname") in {None, "Arial"} for sheet in sheets.values()
+                          for run in sheet.findall("./layout-options/title/formatted-text/run"))
+                  and all(item.get("value") == "Arial" for sheet in sheets.values()
+                          for item in sheet.findall("./table/style/style-rule[@element='title']/format[@attr='font-family']")))
         relations = root.findall("./datasource-relationships/datasource-relationship")
         mappings = relations[0].findall("./column-mapping/map") if len(relations) == 1 else []
         check("Cross-source relationship maps only the matching threshold fields", len(relations) == 1
@@ -144,8 +153,11 @@ def inspect(workbook, expected_overall_csv, expected_destination_csv):
         axes = routes.findall("./table/style/style-rule[@element='axis']/encoding[@attr='space']")
         check("Destination dual axes are synchronized", len(axes) == 1 and axes[0].get("field") == point
               and axes[0].get("fold") == "true" and axes[0].get("synchronized") == "true")
+        axis_title = routes.find("./table/style/style-rule/format[@attr='title']").get("value")
+        expected_axis_title = ("Evening − morning disruption rate gap (percentage points)"
+                               if final else "Evening − Morning (Percentage Points)")
         check("Destination axis uses percentage-point units and automatic range", not axes[0].get("range-type")
-              and routes.find("./table/style/style-rule/format[@attr='title']").get("value") == "Evening − Morning (Percentage Points)"
+              and axis_title == expected_axis_title
               and routes.find("./table/style/style-rule/format[@attr='display']").get("value") == "false")
         panes = {pane.get("x-axis-name"): pane for pane in routes.findall("./table/panes/pane") if pane.get("x-axis-name")}
         check("Two rendered layers use gap dots and lower-bound interval starts", set(panes) == {point, lower}
@@ -183,7 +195,24 @@ def inspect(workbook, expected_overall_csv, expected_destination_csv):
               and cards[0].get("mode") == "radiolist" and cards[0].get("show-all") == "false")
         legends = [zone for zone in zones if zone.get("type-v2") == "color"]
         check("Visible legend describes destination direction evidence", len(legends) == 1 and legends[0].get("param") == evidence)
-        footers = [zone for zone in zones if zone.get("type-v2") == "text"]
+        text_zones = [zone for zone in zones if zone.get("type-v2") == "text"]
+        if final:
+            check("Final dashboard has one interpretation note and one source footer", len(text_zones) == 2)
+            notes = [zone for zone in text_zones if text(zone.find("./formatted-text")).startswith("Positive values")]
+            interpretation = ("Positive values mean higher evening disruption rates; negative values mean higher morning rates. "
+                              "Gray dots indicate uncertain direction.")
+            check("Final interpretation note explains both signs and uncertain direction", len(notes) == 1
+                  and text(notes[0].find("./formatted-text")) == interpretation)
+            footers = [zone for zone in text_zones if zone is not notes[0]]
+            check("Interpretation follows the destination view and precedes the source footer",
+                  int(notes[0].get("y")) >= max(int(zone.get("y")) + int(zone.get("h")) for zone in views)
+                  and int(notes[0].get("y")) + int(notes[0].get("h")) <= int(footers[0].get("y")))
+            check("Both final text zones stay inside normalized dashboard bounds", all(
+                int(zone.get("x")) >= 0 and int(zone.get("y")) >= 0
+                and int(zone.get("x")) + int(zone.get("w")) <= 100000
+                and int(zone.get("y")) + int(zone.get("h")) <= 100000 for zone in text_zones))
+        else:
+            footers = text_zones
         footer = text(footers[0].find("./formatted-text")) if len(footers) == 1 else ""
         check("Footer names the source, scope, coverage, limits, and methods link", all(part in footer for part in [
             "U.S. DOT/BTS Reporting Carrier On-Time Performance", "Domestic LAX departures, 2025", "57,464",
@@ -202,7 +231,8 @@ def inspect(workbook, expected_overall_csv, expected_destination_csv):
                     check(f"{caption} uses an enabled packaged extract", extract is not None and extract.get("enabled") == "true"
                           and extract.find("./connection").get("dbname") in hyper_names)
                     local = Path(directory) / f"extract_{index}.hyper"
-                    local.write_bytes(package.read(extract.find("./connection").get("dbname")))
+                    extract_bytes = package.read(extract.find("./connection").get("dbname"))
+                    local.write_bytes(extract_bytes)
                     with reference_path.open(newline="", encoding="utf-8") as stream:
                         reader = csv.DictReader(stream)
                         expected_columns, expected_rows = reader.fieldnames, list(reader)
@@ -235,7 +265,8 @@ def inspect(workbook, expected_overall_csv, expected_destination_csv):
                                 if not matches:
                                     raise ValueError(f"Extract differs from validated CSV: {caption}, {name}, {key(row)}")
                         check(f"{caption}: every embedded value matches its CSV (absolute numeric tolerance 1e-12)", True)
-                        datasets[caption] = {"rows": records, "columns": columns, "sha256": digest(reference_path)}
+                        datasets[caption] = {"rows": records, "columns": columns, "sha256": digest(reference_path),
+                                             "extract_sha256": hashlib.sha256(extract_bytes).hexdigest()}
                         if index:
                             literals = ", ".join("'" + code.replace("'", "''") + "'" for code in sorted(codes))
                             for threshold_value in [15, 60]:
@@ -268,7 +299,7 @@ def inspect(workbook, expected_overall_csv, expected_destination_csv):
     check("Destination direction labels agree with the adjusted interval signs", all(
         row["Direction Evidence"] == ("Higher evening rate" if row["Gap Interval Lower pp"] > 0 else "Higher morning rate" if row["Gap Interval Upper pp"] < 0 else "Uncertain direction") for row in visible))
     check("Inspection leaves the uploaded workbook unchanged", digest(workbook) == original_hash)
-    return {"checkpoint": "03", "workbook_name": workbook.name, "workbook_sha256": original_hash,
+    result = {"checkpoint": "final" if final else "03", "workbook_name": workbook.name, "workbook_sha256": original_hash,
             "tableau_version": root.get("source-build"), "hyper_api_version": importlib.metadata.version("tableauhyperapi"),
             "worksheet": "Overall Reliability", "worksheets": sorted(sheets), "dashboard": dashboard.get("name"),
             "dashboard_sizing": "automatic", "selected_threshold": selections[0], "embedded_rows": 94,
@@ -280,3 +311,9 @@ def inspect(workbook, expected_overall_csv, expected_destination_csv):
             "label_binding_examples": labels, "destination_sql_examples": sql_examples, "footer": footer, "checks": checks,
             "scope": "ZIP, saved workbook configuration, field bindings, and direct SQL on both embedded extracts; no fresh Tableau rendering or automated UI switching. Author screenshots at both thresholds were reviewed separately.",
             "layout_scope": "Automatic desktop sizing and saved zone geometry checked. Arbitrary viewport sizes and the auto-generated phone layout have not received visual review."}
+    if final:
+        result.update({"inspection_profile": "final", "destination_axis_title": axis_title,
+                       "worksheet_title_font": "Arial", "interpretation_note": interpretation,
+                       "extract_sha256": {name: data["extract_sha256"] for name, data in datasets.items()},
+                       "scope": "Final archive: ZIP integrity, saved configuration, field bindings, and direct SQL on both embedded extracts. Live desktop interaction was reviewed separately in reports/tableau_public_review.md; this script does not render Tableau or establish byte identity with a server download."})
+    return result

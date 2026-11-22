@@ -98,8 +98,10 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def inspect(workbook=WORKBOOK, expected_csv=SOURCE):
+def inspect(workbook=WORKBOOK, expected_csv=SOURCE, *, final=None):
     """Read a temporary extract copy; leave the supplied workbook unchanged."""
+    if final is None:
+        final = workbook.name == "LAX_Flight_Reliability_Final.twbx"
     checks = []
 
     def check(description, condition):
@@ -117,10 +119,12 @@ def inspect(workbook=WORKBOOK, expected_csv=SOURCE):
         names = package.namelist()
         xml_names = [name for name in names if name.lower().endswith(".twb")]
         hyper_names = [name for name in names if name.lower().endswith(".hyper")]
+        if final:
+            check("Final workbook includes both analysis extracts", len(hyper_names) == 2)
         if len(hyper_names) == 2:
             from scripts.inspect_tableau_destination_dashboard import inspect as inspect_destination
             return inspect_destination(workbook, expected_csv,
-                                       expected_csv.parent / "destination_comparison_2025.csv")
+                                       expected_csv.parent / "destination_comparison_2025.csv", final=final)
         check("Package contains one workbook and one data extract", len(xml_names) == len(hyper_names) == 1)
         root = ET.fromstring(package.read(xml_names[0]))
         sources = root.findall("./datasources/datasource")
@@ -231,9 +235,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workbook", type=Path, default=WORKBOOK)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--final", action="store_true", default=None,
+                        help="Require final-presentation checks for a renamed workbook; automatic for LAX_Flight_Reliability_Final.twbx")
     arguments = parser.parse_args()
-    result = inspect(arguments.workbook)
-    output = arguments.output or ROOT / f"reports/tableau_checkpoint_{result['checkpoint']}.json"
+    result = inspect(arguments.workbook, final=arguments.final)
+    report_name = "tableau_final.json" if result["checkpoint"] == "final" else f"tableau_checkpoint_{result['checkpoint']}.json"
+    output = arguments.output or ROOT / "reports" / report_name
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"checks_passed": len(result["checks"]), "rows": result["embedded_rows"],

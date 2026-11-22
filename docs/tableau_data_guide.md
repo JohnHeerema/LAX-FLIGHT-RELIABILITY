@@ -1,6 +1,6 @@
 # Tableau dashboard/story data guide
 
-The visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The [live dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes) contains overall rates, a live gap/interval summary, and eight destination comparisons. One threshold selector controls all three views across two separate sources. The [published-view review](../reports/tableau_public_review.md) verifies both threshold states in a signed-out desktop browser. The preserved [authoring checkpoint 03](../tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) predates the later presentation edits; its embedded-data audit remains available.
+The visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The [live dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes) contains overall rates, a live gap/interval summary, and eight destination comparisons. One threshold selector controls all three views across two separate sources. The [published-view review](../reports/tableau_public_review.md) verifies both threshold states in a signed-out desktop browser. Download the [final packaged workbook](../tableau/LAX_Flight_Reliability_Final.twbx) and read its [embedded-data and configuration audit](../reports/tableau_final.md). Earlier authoring checkpoints remain preserved separately.
 
 ## First checkpoint: connect one small source
 
@@ -63,9 +63,9 @@ Whole-month, airline, and destination filters preserve the matched group structu
 
 Use the author's selected colors consistently: **orange for morning (`#F28E2B`)** and **blue for evening (`#4E79A7`)**. Keep morning above evening. Label rates as historical 2025 observations and keep the departure windows visible. Causal effects, future guarantees, and cost savings are not established by these comparisons.
 
-## Verified native workbook checkpoint
+## Verified final native workbook
 
-The [checkpoint 03 audit](../reports/tableau_checkpoint_03.md) compares every embedded value with both validated CSVs. The overall extract has two rows and 19 fields; the destination extract has 92 rows and 22 fields. All three worksheet titles insert the shared threshold value. The overall percentage axis remains fixed at 0–25%, with 5-percentage-point ticks. The saved workbook selects 60 minutes, and both thresholds are embedded.
+The [final audit](../reports/tableau_final.md) compares every embedded value with both validated CSVs. The overall extract has two rows and 19 fields; the destination extract has 92 rows and 22 fields. All three worksheet titles insert the shared threshold value. The overall percentage axis remains fixed at 0–25%, with 5-percentage-point ticks. The saved workbook selects the primary **15-minute** definition, and both thresholds are embedded. Worksheet titles inherit Arial. The destination axis names the evening-minus-morning disruption-rate gap in percentage points, and a separate interpretation note explains positive values, negative values, and gray dots.
 
 The three worksheets are stacked in a desktop dashboard with automatic sizing and a source/methods footer. Gap and interval values use MIN and effective custom `0.00` number formats. This worksheet formatting overrides an inherited percentage default on the overall source's `Gap pp`; choose number formatting whenever reusing this field. Viewport and phone-layout reviews remain separate from the configuration audit.
 

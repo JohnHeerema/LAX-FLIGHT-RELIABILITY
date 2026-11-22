@@ -1,0 +1,564 @@
+{
+  "checkpoint": "final",
+  "workbook_name": "LAX_Flight_Reliability_Final.twbx",
+  "workbook_sha256": "9c8650d76736c74eab711730f3216d1656153dfd486079836d3d2fa7c6142562",
+  "tableau_version": "2026.2.3 (20262.26.0912.1023)",
+  "hyper_api_version": "0.0.26963",
+  "worksheet": "Overall Reliability",
+  "worksheets": [
+    "Destination Gaps",
+    "Gap Summary",
+    "Overall Reliability"
+  ],
+  "dashboard": "LAX Reliability Overview",
+  "dashboard_sizing": "automatic",
+  "selected_threshold": 15,
+  "embedded_rows": 94,
+  "embedded_columns": {
+    "overall_comparison_2025": 19,
+    "destination_comparison_2025": 22
+  },
+  "embedded_values_compared": 2062,
+  "reference_csvs": [
+    {
+      "path": "data/tableau/overall_comparison_2025.csv",
+      "sha256": "a74ec9a683282e353f9ef84046f23233155bebe83b06cae67318b49fe440c96a",
+      "rows": 2,
+      "columns": 19
+    },
+    {
+      "path": "data/tableau/destination_comparison_2025.csv",
+      "sha256": "b738b9b81f9bf368681804ebff611dbbcf9aa17ff5b641dcd9f54d3b77fd5b33",
+      "rows": 92,
+      "columns": 22
+    }
+  ],
+  "colors": {
+    "Morning Disruption Rate": "#f28e2b",
+    "Evening Disruption Rate": "#4e79a7"
+  },
+  "direction_colors": {
+    "Higher evening rate": "#4e79a7",
+    "Uncertain direction": "#8a8382"
+  },
+  "interval_color": "#e6e6e6",
+  "effective_gap_number_format": "0.00",
+  "gap_field_default_format": "p0.00%",
+  "results": [
+    {
+      "Delay Threshold Minutes": 15,
+      "Morning Disruption Rate": 0.11988243212550811,
+      "Evening Disruption Rate": 0.21355859111945863,
+      "Gap pp": 9.367615899395053,
+      "Gap Interval Lower pp": 8.341107215501173,
+      "Gap Interval Upper pp": 10.394124583288933
+    },
+    {
+      "Delay Threshold Minutes": 60,
+      "Morning Disruption Rate": 0.0441568323388093,
+      "Evening Disruption Rate": 0.08006851381855142,
+      "Gap pp": 3.5911681479742117,
+      "Gap Interval Lower pp": 2.956301721263998,
+      "Gap Interval Upper pp": 4.226034574684425
+    }
+  ],
+  "label_binding_examples": [
+    {
+      "threshold_minutes": 15,
+      "label": "9.37 percentage points\nApprox. 95% model-based interval: 8.34 to 10.39 percentage points"
+    },
+    {
+      "threshold_minutes": 60,
+      "label": "3.59 percentage points\nApprox. 95% model-based interval: 2.96 to 4.23 percentage points"
+    }
+  ],
+  "destination_sql_examples": [
+    {
+      "threshold_minutes": 15,
+      "direction_counts": {
+        "Higher evening rate": 7,
+        "Uncertain direction": 1
+      },
+      "destinations": [
+        {
+          "code": "DEN",
+          "gap_pp": 9.71793592088537,
+          "lower_pp": 4.904809780268206,
+          "upper_pp": 14.531062061502537,
+          "width_pp": 9.626252281234331,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "DFW",
+          "gap_pp": 2.3663603557530695,
+          "lower_pp": -3.866183534206126,
+          "upper_pp": 8.598904245712264,
+          "width_pp": 12.46508777991839,
+          "direction_evidence": "Uncertain direction"
+        },
+        {
+          "code": "HNL",
+          "gap_pp": 10.117654720925678,
+          "lower_pp": 5.720916714657181,
+          "upper_pp": 14.514392727194176,
+          "width_pp": 8.793476012536996,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "LAS",
+          "gap_pp": 18.148708188214467,
+          "lower_pp": 13.617239789282054,
+          "upper_pp": 22.680176587146878,
+          "width_pp": 9.062936797864824,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "PHX",
+          "gap_pp": 8.256858730590318,
+          "lower_pp": 3.5053314998928387,
+          "upper_pp": 13.008385961287797,
+          "width_pp": 9.503054461394958,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "SEA",
+          "gap_pp": 5.962457874533461,
+          "lower_pp": 2.0608540322718802,
+          "upper_pp": 9.864061716795042,
+          "width_pp": 7.803207684523162,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "SFO",
+          "gap_pp": 13.94489088394398,
+          "lower_pp": 8.592179643797177,
+          "upper_pp": 19.297602124090783,
+          "width_pp": 10.705422480293606,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "SMF",
+          "gap_pp": 9.4428448437484,
+          "lower_pp": 5.31074200492563,
+          "upper_pp": 13.574947682571171,
+          "width_pp": 8.264205677645542,
+          "direction_evidence": "Higher evening rate"
+        }
+      ]
+    },
+    {
+      "threshold_minutes": 60,
+      "direction_counts": {
+        "Higher evening rate": 4,
+        "Uncertain direction": 4
+      },
+      "destinations": [
+        {
+          "code": "DEN",
+          "gap_pp": 2.4919309947507906,
+          "lower_pp": -0.4633130261598447,
+          "upper_pp": 5.4471750156614265,
+          "width_pp": 5.910488041821271,
+          "direction_evidence": "Uncertain direction"
+        },
+        {
+          "code": "DFW",
+          "gap_pp": -0.24231001652480072,
+          "lower_pp": -4.6046877636094266,
+          "upper_pp": 4.120067730559826,
+          "width_pp": 8.724755494169251,
+          "direction_evidence": "Uncertain direction"
+        },
+        {
+          "code": "HNL",
+          "gap_pp": 4.3696045181153345,
+          "lower_pp": 1.7210791022003724,
+          "upper_pp": 7.018129934030296,
+          "width_pp": 5.297050831829924,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "LAS",
+          "gap_pp": 5.825646333472305,
+          "lower_pp": 2.0316641688092676,
+          "upper_pp": 9.619628498135341,
+          "width_pp": 7.5879643293260735,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "PHX",
+          "gap_pp": 2.47858128686633,
+          "lower_pp": -0.6096862329332917,
+          "upper_pp": 5.566848806665951,
+          "width_pp": 6.176535039599242,
+          "direction_evidence": "Uncertain direction"
+        },
+        {
+          "code": "SEA",
+          "gap_pp": 1.1782660476190407,
+          "lower_pp": -1.1504723981973533,
+          "upper_pp": 3.5070044934354345,
+          "width_pp": 4.657476891632788,
+          "direction_evidence": "Uncertain direction"
+        },
+        {
+          "code": "SFO",
+          "gap_pp": 7.590802950112138,
+          "lower_pp": 4.3693171640673665,
+          "upper_pp": 10.81228873615691,
+          "width_pp": 6.442971572089544,
+          "direction_evidence": "Higher evening rate"
+        },
+        {
+          "code": "SMF",
+          "gap_pp": 3.6920512994757457,
+          "lower_pp": 1.1950889013387558,
+          "upper_pp": 6.189013697612736,
+          "width_pp": 4.99392479627398,
+          "direction_evidence": "Higher evening rate"
+        }
+      ]
+    }
+  ],
+  "footer": "Source: U.S. DOT/BTS Reporting Carrier On-Time Performance \u00b7 Domestic LAX departures, 2025\nOverall comparison: 57,464 matched scheduled flights \u00b7 64.2% of reported flights in the selected departure windows\nHistorical associations; results do not establish causal effects or predict future flights.\nMethods and code: https://github.com/JohnHeerema/LAX-FLIGHT-RELIABILITY",
+  "checks": [
+    {
+      "check": "Packaged workbook ZIP integrity passes",
+      "passed": true
+    },
+    {
+      "check": "Package contains one workbook and two data extracts",
+      "passed": true
+    },
+    {
+      "check": "Both expected analysis sources are present",
+      "passed": true
+    },
+    {
+      "check": "All three expected worksheets are present",
+      "passed": true
+    },
+    {
+      "check": "One named overview dashboard is present",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps has exactly one threshold filter without a conflicting local filter",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps maps the shared threshold to the correct source field",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps saves one valid threshold member",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps uses the shared threshold slice",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps title binds the live shared threshold",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps uses the correct primary data source",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary has exactly one threshold filter without a conflicting local filter",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary maps the shared threshold to the correct source field",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary saves one valid threshold member",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary uses the shared threshold slice",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary title binds the live shared threshold",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary uses the correct primary data source",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability has exactly one threshold filter without a conflicting local filter",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability maps the shared threshold to the correct source field",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability saves one valid threshold member",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability uses the shared threshold slice",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability title binds the live shared threshold",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability uses the correct primary data source",
+      "passed": true
+    },
+    {
+      "check": "All three threshold filters share one group and saved selection",
+      "passed": true
+    },
+    {
+      "check": "Final workbook opens at the primary 15-minute threshold",
+      "passed": true
+    },
+    {
+      "check": "Final worksheet titles inherit Arial without conflicting overrides",
+      "passed": true
+    },
+    {
+      "check": "Cross-source relationship maps only the matching threshold fields",
+      "passed": true
+    },
+    {
+      "check": "Rate fields use MIN and two-decimal percentage formats",
+      "passed": true
+    },
+    {
+      "check": "Only the two MIN disruption rates appear as bars",
+      "passed": true
+    },
+    {
+      "check": "Rate chart uses horizontal labeled bars",
+      "passed": true
+    },
+    {
+      "check": "Rate axis spans 0-25 percent with 5-point ticks",
+      "passed": true
+    },
+    {
+      "check": "Rate axis displays percentages",
+      "passed": true
+    },
+    {
+      "check": "Morning stays orange and evening stays blue",
+      "passed": true
+    },
+    {
+      "check": "Morning precedes evening",
+      "passed": true
+    },
+    {
+      "check": "Summary gap and bounds use MIN",
+      "passed": true
+    },
+    {
+      "check": "Summary text binds exactly the gap and two bounds",
+      "passed": true
+    },
+    {
+      "check": "Summary values have effective two-decimal number formats",
+      "passed": true
+    },
+    {
+      "check": "Summary label uses live values and percentage-point units",
+      "passed": true
+    },
+    {
+      "check": "Summary uses a text mark with no row or column dimensions",
+      "passed": true
+    },
+    {
+      "check": "Destination filter selects exactly eight distinct codes",
+      "passed": true
+    },
+    {
+      "check": "Interval width is upper minus lower",
+      "passed": true
+    },
+    {
+      "check": "Destination gap, lower bound, and width use MIN",
+      "passed": true
+    },
+    {
+      "check": "Destination rows and columns bind codes, lower bounds, and gaps",
+      "passed": true
+    },
+    {
+      "check": "Destination dual axes are synchronized",
+      "passed": true
+    },
+    {
+      "check": "Destination axis uses percentage-point units and automatic range",
+      "passed": true
+    },
+    {
+      "check": "Two rendered layers use gap dots and lower-bound interval starts",
+      "passed": true
+    },
+    {
+      "check": "Dots encode direction evidence and intervals encode validated width",
+      "passed": true
+    },
+    {
+      "check": "Intervals are light gray with labels hidden; dot labels are shown",
+      "passed": true
+    },
+    {
+      "check": "Direction colors distinguish higher evening rates from uncertain direction",
+      "passed": true
+    },
+    {
+      "check": "Destination gap labels use numeric percentage points",
+      "passed": true
+    },
+    {
+      "check": "Dashboard includes all three verified worksheet zones",
+      "passed": true
+    },
+    {
+      "check": "Dashboard stacks the three views in reading order",
+      "passed": true
+    },
+    {
+      "check": "Saved desktop dashboard uses automatic sizing",
+      "passed": true
+    },
+    {
+      "check": "Desktop view zones are within normalized dashboard bounds",
+      "passed": true
+    },
+    {
+      "check": "Dashboard has one shared single-choice threshold control with All hidden",
+      "passed": true
+    },
+    {
+      "check": "Authoring threshold card is also single choice with All hidden",
+      "passed": true
+    },
+    {
+      "check": "Visible legend describes destination direction evidence",
+      "passed": true
+    },
+    {
+      "check": "Final dashboard has one interpretation note and one source footer",
+      "passed": true
+    },
+    {
+      "check": "Final interpretation note explains both signs and uncertain direction",
+      "passed": true
+    },
+    {
+      "check": "Interpretation follows the destination view and precedes the source footer",
+      "passed": true
+    },
+    {
+      "check": "Both final text zones stay inside normalized dashboard bounds",
+      "passed": true
+    },
+    {
+      "check": "Footer names the source, scope, coverage, limits, and methods link",
+      "passed": true
+    },
+    {
+      "check": "Footer appears below the destination chart",
+      "passed": true
+    },
+    {
+      "check": "overall_comparison_2025 uses an enabled packaged extract",
+      "passed": true
+    },
+    {
+      "check": "overall_comparison_2025 contains one analysis table",
+      "passed": true
+    },
+    {
+      "check": "overall_comparison_2025 schema matches all 19 validated CSV fields",
+      "passed": true
+    },
+    {
+      "check": "overall_comparison_2025 contains exactly 2 unique expected rows",
+      "passed": true
+    },
+    {
+      "check": "overall_comparison_2025: every embedded value matches its CSV (absolute numeric tolerance 1e-12)",
+      "passed": true
+    },
+    {
+      "check": "destination_comparison_2025 uses an enabled packaged extract",
+      "passed": true
+    },
+    {
+      "check": "destination_comparison_2025 contains one analysis table",
+      "passed": true
+    },
+    {
+      "check": "destination_comparison_2025 schema matches all 22 validated CSV fields",
+      "passed": true
+    },
+    {
+      "check": "destination_comparison_2025 contains exactly 92 unique expected rows",
+      "passed": true
+    },
+    {
+      "check": "destination_comparison_2025: every embedded value matches its CSV (absolute numeric tolerance 1e-12)",
+      "passed": true
+    },
+    {
+      "check": "Embedded SQL returns eight complete dots and ranges at 15 minutes",
+      "passed": true
+    },
+    {
+      "check": "Embedded SQL returns eight complete dots and ranges at 60 minutes",
+      "passed": true
+    },
+    {
+      "check": "Summary label bindings resolve correctly at 15 minutes",
+      "passed": true
+    },
+    {
+      "check": "Summary label bindings resolve correctly at 60 minutes",
+      "passed": true
+    },
+    {
+      "check": "Displayed destinations are the eight largest matched-flight counts at 15 minutes",
+      "passed": true
+    },
+    {
+      "check": "Displayed destinations are the eight largest matched-flight counts at 60 minutes",
+      "passed": true
+    },
+    {
+      "check": "All 16 displayed comparisons have supported coverage and 62-comparison family intervals",
+      "passed": true
+    },
+    {
+      "check": "Destination direction labels agree with the adjusted interval signs",
+      "passed": true
+    },
+    {
+      "check": "Inspection leaves the uploaded workbook unchanged",
+      "passed": true
+    }
+  ],
+  "scope": "Final archive: ZIP integrity, saved configuration, field bindings, and direct SQL on both embedded extracts. Live desktop interaction was reviewed separately in reports/tableau_public_review.md; this script does not render Tableau or establish byte identity with a server download.",
+  "layout_scope": "Automatic desktop sizing and saved zone geometry checked. Arbitrary viewport sizes and the auto-generated phone layout have not received visual review.",
+  "inspection_profile": "final",
+  "destination_axis_title": "Evening \u2212 morning disruption rate gap (percentage points)",
+  "worksheet_title_font": "Arial",
+  "interpretation_note": "Positive values mean higher evening disruption rates; negative values mean higher morning rates. Gray dots indicate uncertain direction.",
+  "extract_sha256": {
+    "overall_comparison_2025": "5dd973cdd1338fef91534baf0f2f095ef7aafcb9d8c046700767c647b0e48cd6",
+    "destination_comparison_2025": "fb602d166f616163c602f5e409d0ca00f5da3f459422878073e244849a906e51"
+  }
+}
