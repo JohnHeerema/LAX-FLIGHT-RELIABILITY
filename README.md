@@ -4,7 +4,7 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** The matched comparisons, destination/severity follow-up, and Tableau input tables are complete. The first interactive Tableau worksheet is verified; gap/uncertainty summaries, destination views, and final dashboard/story review are next.
+**Status:** The matched comparisons, destination/severity follow-up, and Tableau input tables are complete. The first Tableau overview dashboard is verified, including the shared 15/60-minute selector, gap, and uncertainty summary. Destination views and final dashboard/story review are next.
 
 **Visualization platform:** The final dashboard or story will be built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
 
@@ -85,6 +85,7 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Explore destination differences and the 60-minute delay threshold.
 - [x] Prepare validated Tableau sources with documented row grains and calculations.
 - [x] Author and verify the first native Tableau worksheet with a 15/60-minute selector.
+- [x] Combine the rates and live gap/interval summary into a verified Tableau overview dashboard.
 - [ ] Build the Tableau dashboard or story and complete its visual checks.
 - [ ] Add reproduction instructions and complete the final review.
 
@@ -165,16 +166,17 @@ The command regenerates the [overall](data/tableau/overall_comparison_2025.csv),
 
 ## Inspect the native Tableau checkpoint
 
-The [packaged workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_01.twbx) is an authoring checkpoint, containing the overall comparison and its embedded data. The [audit](reports/tableau_checkpoint_01.md) checks its data against the validated CSV and inspects the saved filter, title, aggregation, axis, colors, and bar order.
+The current [overview workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_02.twbx) contains the overall comparison, a live gap/interval card, and one shared threshold selector. Its [audit](reports/tableau_checkpoint_02.md) checks the embedded data, both dynamic titles, field inserts, percentage-point formatting, and desktop layout. The earlier [single-worksheet checkpoint](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_01.twbx) and [audit](reports/tableau_checkpoint_01.md) remain available.
 
 To repeat the inspection without downloading the raw flight archives:
 
 ```bash
 python -m pip install -r requirements-tableau.txt
 python -m scripts.inspect_tableau_workbook
+python -m scripts.inspect_tableau_workbook --workbook tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_02.twbx
 ```
 
-The command regenerates the [machine-readable audit](reports/tableau_checkpoint_01.json). It reads a temporary copy of the embedded extract and leaves the packaged workbook unchanged. It verifies data and configuration; screenshots and in-app interactions are checked separately during authoring.
+The commands regenerate the [checkpoint 01](reports/tableau_checkpoint_01.json) and [checkpoint 02](reports/tableau_checkpoint_02.json) machine-readable audits. Inspection reads a temporary copy of the embedded extract and leaves each packaged workbook unchanged. It verifies data and configuration; screenshots and in-app interactions are checked separately during authoring. Desktop layouts are in scope here; the auto-generated phone layout still needs visual review.
 
 ## AI assistance
 

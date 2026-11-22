@@ -1,0 +1,216 @@
+{
+  "checkpoint": "02",
+  "workbook_name": "LAX_Flight_Reliability_Checkpoint_02.twbx",
+  "workbook_sha256": "3ed598a53ea5463ca4d35a05294e917ceb1ee85fcc47b4b470a9cd43d4093052",
+  "reference_csv": "data/tableau/overall_comparison_2025.csv",
+  "reference_csv_sha256": "a74ec9a683282e353f9ef84046f23233155bebe83b06cae67318b49fe440c96a",
+  "tableau_version": "2026.2.3 (20262.26.0912.1023)",
+  "hyper_api_version": "0.0.26963",
+  "worksheet": "Overall Reliability",
+  "embedded_rows": 2,
+  "embedded_columns": 19,
+  "selected_threshold": 60,
+  "colors": {
+    "Morning Disruption Rate": "#f28e2b",
+    "Evening Disruption Rate": "#4e79a7"
+  },
+  "results": [
+    {
+      "Delay Threshold Minutes": 15,
+      "Morning Disruption Rate": 0.11988243212550811,
+      "Evening Disruption Rate": 0.21355859111945863,
+      "Gap pp": 9.367615899395053,
+      "Gap Interval Lower pp": 8.341107215501173,
+      "Gap Interval Upper pp": 10.394124583288933
+    },
+    {
+      "Delay Threshold Minutes": 60,
+      "Morning Disruption Rate": 0.0441568323388093,
+      "Evening Disruption Rate": 0.08006851381855142,
+      "Gap pp": 3.5911681479742117,
+      "Gap Interval Lower pp": 2.956301721263998,
+      "Gap Interval Upper pp": 4.226034574684425
+    }
+  ],
+  "checks": [
+    {
+      "check": "Packaged workbook ZIP integrity passes",
+      "passed": true
+    },
+    {
+      "check": "Package contains one workbook and one data extract",
+      "passed": true
+    },
+    {
+      "check": "Dashboard checkpoint contains one overall source and two expected worksheets",
+      "passed": true
+    },
+    {
+      "check": "Active data extract is included inside the package",
+      "passed": true
+    },
+    {
+      "check": "Extract contains one analysis table",
+      "passed": true
+    },
+    {
+      "check": "All 19 extract fields match the validated CSV schema",
+      "passed": true
+    },
+    {
+      "check": "Extract contains exactly the 15- and 60-minute rows",
+      "passed": true
+    },
+    {
+      "check": "Reference CSV contains exactly one row per threshold",
+      "passed": true
+    },
+    {
+      "check": "Every extracted value agrees with the validated CSV (absolute numeric tolerance 1e-12)",
+      "passed": true
+    },
+    {
+      "check": "Threshold is a dimension",
+      "passed": true
+    },
+    {
+      "check": "One threshold filter is present",
+      "passed": true
+    },
+    {
+      "check": "Saved filter selects one valid threshold",
+      "passed": true
+    },
+    {
+      "check": "Threshold control is single choice with All hidden",
+      "passed": true
+    },
+    {
+      "check": "Title uses the live threshold field",
+      "passed": true
+    },
+    {
+      "check": "Morning Disruption Rate defaults to MIN and two-decimal percentage formatting",
+      "passed": true
+    },
+    {
+      "check": "Evening Disruption Rate defaults to MIN and two-decimal percentage formatting",
+      "passed": true
+    },
+    {
+      "check": "Only the two MIN disruption rates appear as bars",
+      "passed": true
+    },
+    {
+      "check": "View uses horizontal bars with visible labels",
+      "passed": true
+    },
+    {
+      "check": "Axis is fixed at 0-25 percent with 5-point ticks",
+      "passed": true
+    },
+    {
+      "check": "Numeric axis displays percentages",
+      "passed": true
+    },
+    {
+      "check": "Colors preserve morning orange and evening blue",
+      "passed": true
+    },
+    {
+      "check": "Morning precedes evening",
+      "passed": true
+    },
+    {
+      "check": "One shared threshold filter targets the common data source",
+      "passed": true
+    },
+    {
+      "check": "Both worksheets use the shared source and threshold slice",
+      "passed": true
+    },
+    {
+      "check": "Gap title uses the shared live threshold field",
+      "passed": true
+    },
+    {
+      "check": "Gap and both interval fields use MIN",
+      "passed": true
+    },
+    {
+      "check": "Summary text uses exactly the three validated gap fields",
+      "passed": true
+    },
+    {
+      "check": "All three effective gap formats are two-decimal numbers",
+      "passed": true
+    },
+    {
+      "check": "Summary label binds all three live values and percentage-point units",
+      "passed": true
+    },
+    {
+      "check": "Gap summary is a text mark without row or column dimensions",
+      "passed": true
+    },
+    {
+      "check": "Overview dashboard has the expected name",
+      "passed": true
+    },
+    {
+      "check": "Desktop dashboard has fixed 1100-by-650 dimensions",
+      "passed": true
+    },
+    {
+      "check": "Dashboard contains both verified worksheets",
+      "passed": true
+    },
+    {
+      "check": "Overall chart and gap card share a vertical container in reading order",
+      "passed": true
+    },
+    {
+      "check": "Desktop dashboard exposes one single-choice threshold control with All hidden",
+      "passed": true
+    },
+    {
+      "check": "Both desktop view zones remain inside the dashboard bounds",
+      "passed": true
+    },
+    {
+      "check": "Summary field bindings resolve correctly at 15 minutes",
+      "passed": true
+    },
+    {
+      "check": "Summary field bindings resolve correctly at 60 minutes",
+      "passed": true
+    },
+    {
+      "check": "Inspection leaves the uploaded workbook unchanged",
+      "passed": true
+    }
+  ],
+  "scope": "ZIP, workbook configuration, and direct SQL on embedded data; no fresh Tableau rendering. Screenshots and threshold switching were reviewed separately during authoring.",
+  "worksheets": [
+    "Gap Summary",
+    "Overall Reliability"
+  ],
+  "dashboard": "LAX Reliability Overview",
+  "dashboard_dimensions": {
+    "width": 1100,
+    "height": 650
+  },
+  "effective_gap_number_format": "0.00",
+  "gap_field_default_format": "p0.00%",
+  "label_binding_examples": [
+    {
+      "threshold_minutes": 15,
+      "label": "9.37 percentage points\nApprox. 95% model-based interval: 8.34 to 10.39 percentage points"
+    },
+    {
+      "threshold_minutes": 60,
+      "label": "3.59 percentage points\nApprox. 95% model-based interval: 2.96 to 4.23 percentage points"
+    }
+  ],
+  "layout_scope": "Desktop layout checked; auto-generated phone layout has not been visually reviewed."
+}
