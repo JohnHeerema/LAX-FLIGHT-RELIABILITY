@@ -117,6 +117,10 @@ def inspect(workbook=WORKBOOK, expected_csv=SOURCE):
         names = package.namelist()
         xml_names = [name for name in names if name.lower().endswith(".twb")]
         hyper_names = [name for name in names if name.lower().endswith(".hyper")]
+        if len(hyper_names) == 2:
+            from scripts.inspect_tableau_destination_dashboard import inspect as inspect_destination
+            return inspect_destination(workbook, expected_csv,
+                                       expected_csv.parent / "destination_comparison_2025.csv")
         check("Package contains one workbook and one data extract", len(xml_names) == len(hyper_names) == 1)
         root = ET.fromstring(package.read(xml_names[0]))
         sources = root.findall("./datasources/datasource")

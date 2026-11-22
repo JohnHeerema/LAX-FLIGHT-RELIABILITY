@@ -1,6 +1,6 @@
 # Tableau dashboard/story data guide
 
-The final visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The current [native overview checkpoint](../tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_02.twbx) contains the overall rates and live gap/interval summary, controlled by one threshold selector. Destination views and the finished dashboard/story remain to be authored.
+The visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The current [three-view checkpoint](../tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) contains overall rates, a live gap/interval summary, and eight destination comparisons. One threshold selector controls all three views across two separate sources.
 
 ## First checkpoint: connect one small source
 
@@ -65,10 +65,24 @@ Use the author's selected colors consistently: **orange for morning (`#F28E2B`)*
 
 ## Verified native workbook checkpoint
 
-The [overview checkpoint audit](../reports/tableau_checkpoint_02.md) compares every value in the packaged Hyper extract with the validated overall CSV and inspects the actual saved workbook settings. The threshold control uses a single-choice list with All hidden; both titles insert the live threshold value. The numeric axis is fixed at 0–25%, with 5-percentage-point ticks, while rate labels retain two decimal places. The saved workbook selects 60 minutes; both threshold rows are included.
+The [checkpoint 03 audit](../reports/tableau_checkpoint_03.md) compares every embedded value with both validated CSVs. The overall extract has two rows and 19 fields; the destination extract has 92 rows and 22 fields. All three worksheet titles insert the shared threshold value. The overall percentage axis remains fixed at 0–25%, with 5-percentage-point ticks. The saved workbook selects 60 minutes, and both thresholds are embedded.
 
-The two worksheets share one source-level threshold filter and are stacked in the 1100-by-650 desktop overview. Gap and interval values use MIN and effective custom `0.00` number formats. This worksheet formatting overrides an inherited percentage default on `Gap pp`; use number formatting for this field when creating further views. The overview is a desktop authoring checkpoint, with an auto-generated phone layout that has not yet received a visual review.
+The three worksheets are stacked in a desktop dashboard with automatic sizing and a source/methods footer. Gap and interval values use MIN and effective custom `0.00` number formats. This worksheet formatting overrides an inherited percentage default on the overall source's `Gap pp`; choose number formatting whenever reusing this field. Viewport and phone-layout reviews remain separate from the configuration audit.
 
-The next authoring source is [destination_comparison_2025.csv](../data/tableau/destination_comparison_2025.csv): 92 rows representing 46 destinations at two thresholds. Add it through **Data → New Data Source → Text File** as a separate source. Keep its destination/threshold grain distinct from the two-row overall source. Blank bounds identify limited coverage and remain blank.
+### Shared threshold across sources
+
+Keep the overall and destination CSVs as separate sources at their documented grains. Map **overall `Delay Threshold Minutes` → destination `Delay Threshold Minutes`** in the cross-source relationship and apply the existing shared filter to all three worksheets. In the saved checkpoint, each worksheet has one threshold filter in the same filter group; Destination Gaps targets the mapped destination field.
+
+A separate local destination threshold filter can conflict with the shared selector. For example, shared 15 plus local 60 produces no destination rows. Remove that competing local filter and retain the shared mapping. Switching the filter scope to only **All Using This Data Source** does not cover a worksheet using the separate destination source. Verify the bars, summary, destination marks, and all titles at both 15 and 60 after changing filter scope.
+
+### Destination marks and intervals
+
+The eight displayed destinations are selected by matched flight count, not by the size of their gaps: DEN, DFW, HNL, LAS, PHX, SEA, SFO, and SMF. The same eight remain visible at both thresholds. The destination layer uses MIN(`Gap pp`) for dots on synchronized dual axes, MIN(`Gap Interval Lower pp`) for Gantt starts, and MIN of the following calculated field for Gantt size:
+
+```text
+[Gap Interval Upper pp] - [Gap Interval Lower pp]
+```
+
+Keep interval labels hidden and dot labels visible. Dots use blue for **Higher evening rate** and gray for **Uncertain direction**; intervals are light gray. These categories derive from adjusted bounds across all 62 supported destination/threshold comparisons, including comparisons outside the eight displayed destinations. An uncertain direction means the interval includes zero; it does not establish equal disruption rates. Blank bounds for limited-coverage destinations remain blank.
 
 Official Tableau references: [Connect to a text file](https://help.tableau.com/current/pro/desktop/en-us/examples_text.htm) and [measure aggregation](https://help.tableau.com/current/pro/desktop/en-us/calculations_aggregation.htm).

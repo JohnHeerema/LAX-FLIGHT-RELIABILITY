@@ -4,9 +4,11 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** The matched comparisons, destination/severity follow-up, and Tableau input tables are complete. The first Tableau overview dashboard is verified, including the shared 15/60-minute selector, gap, and uncertainty summary. Destination views and final dashboard/story review are next.
+**Status:** The analysis and three-view Tableau dashboard are verified. One 15/60-minute selector controls the overall rates, gap/interval card, and eight destination comparisons. The dashboard includes source, coverage, methods, and interpretation notes. Tableau Public publication and final presentation review are next.
 
-**Visualization platform:** The final dashboard or story will be built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
+**Current Tableau checkpoint:** [Download the packaged workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) or read the [data and configuration audit](reports/tableau_checkpoint_03.md).
+
+**Visualization platform:** The dashboard is built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
 
 **First finding:** In comparable 2025 airline/destination/month groups, the disruption rate was **11.99%** for morning departures versus **21.36%** for evening departures: a **9.37-percentage-point gap** (approximate 95% week-cluster interval: **8.34–10.39 points**).
 
@@ -86,7 +88,8 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Prepare validated Tableau sources with documented row grains and calculations.
 - [x] Author and verify the first native Tableau worksheet with a 15/60-minute selector.
 - [x] Combine the rates and live gap/interval summary into a verified Tableau overview dashboard.
-- [ ] Build the Tableau dashboard or story and complete its visual checks.
+- [x] Add destination gaps, adjusted intervals, and source/methods notes; verify both thresholds.
+- [ ] Publish the Tableau dashboard and complete its presentation review.
 - [ ] Add reproduction instructions and complete the final review.
 
 ## Planned deliverables
@@ -166,17 +169,19 @@ The command regenerates the [overall](data/tableau/overall_comparison_2025.csv),
 
 ## Inspect the native Tableau checkpoint
 
-The current [overview workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_02.twbx) contains the overall comparison, a live gap/interval card, and one shared threshold selector. Its [audit](reports/tableau_checkpoint_02.md) checks the embedded data, both dynamic titles, field inserts, percentage-point formatting, and desktop layout. The earlier [single-worksheet checkpoint](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_01.twbx) and [audit](reports/tableau_checkpoint_01.md) remain available.
+The current [three-view workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) contains the overall comparison, a live gap/interval card, and destination gaps with adjusted intervals. Its [audit](reports/tableau_checkpoint_03.md) verifies both embedded datasets, cross-source filter mapping, live values, interval geometry, units, colors, and saved desktop layout. All **2,062 embedded values** agree with the validated CSVs. The earlier [single-worksheet](reports/tableau_checkpoint_01.md) and [two-view overview](reports/tableau_checkpoint_02.md) checkpoints remain available.
 
-To repeat the inspection without downloading the raw flight archives:
+To repeat the latest inspection without downloading the raw flight archives:
 
 ```bash
 python -m pip install -r requirements-tableau.txt
-python -m scripts.inspect_tableau_workbook
-python -m scripts.inspect_tableau_workbook --workbook tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_02.twbx
+python -m scripts.inspect_tableau_workbook --workbook tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx
+python -m unittest discover -s tests -p test_tableau_checkpoint.py -v
 ```
 
-The commands regenerate the [checkpoint 01](reports/tableau_checkpoint_01.json) and [checkpoint 02](reports/tableau_checkpoint_02.json) machine-readable audits. Inspection reads a temporary copy of the embedded extract and leaves each packaged workbook unchanged. It verifies data and configuration; screenshots and in-app interactions are checked separately during authoring. Desktop layouts are in scope here; the auto-generated phone layout still needs visual review.
+The command regenerates the [checkpoint 03 JSON audit](reports/tableau_checkpoint_03.json). Inspection queries temporary copies of the embedded extracts and leaves the packaged workbook unchanged. It checks data and saved configuration; screenshots at both thresholds were reviewed separately during authoring. The desktop dashboard uses automatic sizing. Other viewport sizes and the auto-generated phone layout still need visual review.
+
+Regression checks include the authoring bug where a shared 15-minute selection conflicted with a local 60-minute filter and removed the destination marks. The current workbook uses one shared threshold group mapped across the two sources, with no competing local threshold filter. Earlier checkpoints can be inspected by passing their paths to the same command.
 
 ## AI assistance
 
