@@ -1,6 +1,6 @@
 # Tableau dashboard/story data guide
 
-The final visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The Tableau workbook is the next checkpoint; these files are its authoring inputs.
+The final visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The first [native workbook checkpoint](../tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_01.twbx) contains the verified overall comparison, a single-choice threshold control, and a dynamic title. Gap/uncertainty summaries, destination views, and the finished dashboard/story remain to be authored.
 
 ## First checkpoint: connect one small source
 
@@ -61,6 +61,12 @@ Whole-month, airline, and destination filters preserve the matched group structu
 3. Explain which views use supported historical comparisons and which have limited evidence.
 4. Link the source validation, methods, and reproducible GitHub analysis.
 
-Use teal for morning (`#317F8C`) and coral for evening (`#C45F42`) to keep the visual language consistent. Label rates as historical 2025 observations and keep the departure windows visible. Causal effects, future guarantees, and cost savings are not established by these comparisons.
+Use the author's selected colors consistently: **orange for morning (`#F28E2B`)** and **blue for evening (`#4E79A7`)**. Keep morning above evening. Label rates as historical 2025 observations and keep the departure windows visible. Causal effects, future guarantees, and cost savings are not established by these comparisons.
+
+## Verified native workbook checkpoint
+
+The [checkpoint audit](../reports/tableau_checkpoint_01.md) compares every value in the packaged Hyper extract with the validated overall CSV and inspects the actual saved workbook settings. The threshold control uses a single-choice list with All hidden; the title inserts the live threshold value. The numeric axis is fixed at 0–25%, with 5-percentage-point ticks, while rate labels retain two decimal places. The saved workbook selects 60 minutes; both threshold rows are included.
+
+This is an authoring checkpoint, with one worksheet. The next view will show the evening-minus-morning gap and its approximate model-based interval, using percentage-point units and the same threshold selection.
 
 Official Tableau references: [Connect to a text file](https://help.tableau.com/current/pro/desktop/en-us/examples_text.htm) and [measure aggregation](https://help.tableau.com/current/pro/desktop/en-us/calculations_aggregation.htm).

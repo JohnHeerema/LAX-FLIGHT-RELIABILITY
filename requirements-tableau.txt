@@ -1,0 +1,2 @@
+# Optional: inspect the native Tableau workbook and its packaged extract.
+tableauhyperapi==0.0.26963

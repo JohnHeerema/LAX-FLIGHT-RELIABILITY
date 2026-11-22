@@ -4,7 +4,7 @@
 
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** The matched comparisons, destination/severity follow-up, and Tableau input tables are complete. Tableau authoring and final review are next.
+**Status:** The matched comparisons, destination/severity follow-up, and Tableau input tables are complete. The first interactive Tableau worksheet is verified; gap/uncertainty summaries, destination views, and final dashboard/story review are next.
 
 **Visualization platform:** The final dashboard or story will be built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
 
@@ -84,6 +84,7 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Complete the first matched reliability comparison and sensitivity checks.
 - [x] Explore destination differences and the 60-minute delay threshold.
 - [x] Prepare validated Tableau sources with documented row grains and calculations.
+- [x] Author and verify the first native Tableau worksheet with a 15/60-minute selector.
 - [ ] Build the Tableau dashboard or story and complete its visual checks.
 - [ ] Add reproduction instructions and complete the final review.
 
@@ -161,6 +162,19 @@ python -m scripts.route_severity
 ```
 
 The command regenerates the [overall](data/tableau/overall_comparison_2025.csv), [destination](data/tableau/destination_comparison_2025.csv), and [pair-level](data/tableau/comparison_pairs_2025.csv) CSVs, their [dictionary](data/tableau/data_dictionary.csv), a [checksum manifest](data/manifests/tableau_sources_2025.json), and the [follow-up audit](reports/route_severity.json). The [Tableau guide](docs/tableau_data_guide.md) starts with one small connection and documents the correct aggregation rules.
+
+## Inspect the native Tableau checkpoint
+
+The [packaged workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_01.twbx) is an authoring checkpoint, containing the overall comparison and its embedded data. The [audit](reports/tableau_checkpoint_01.md) checks its data against the validated CSV and inspects the saved filter, title, aggregation, axis, colors, and bar order.
+
+To repeat the inspection without downloading the raw flight archives:
+
+```bash
+python -m pip install -r requirements-tableau.txt
+python -m scripts.inspect_tableau_workbook
+```
+
+The command regenerates the [machine-readable audit](reports/tableau_checkpoint_01.json). It reads a temporary copy of the embedded extract and leaves the packaged workbook unchanged. It verifies data and configuration; screenshots and in-app interactions are checked separately during authoring.
 
 ## AI assistance
 
