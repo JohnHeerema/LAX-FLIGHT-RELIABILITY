@@ -1,6 +1,6 @@
 # Tableau dashboard/story data guide
 
-The visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The current [three-view checkpoint](../tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) contains overall rates, a live gap/interval summary, and eight destination comparisons. One threshold selector controls all three views across two separate sources.
+The visualization platform is **Tableau**. Python and SQL supply validated data and documented calculations. The [live dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes) contains overall rates, a live gap/interval summary, and eight destination comparisons. One threshold selector controls all three views across two separate sources. The [published-view review](../reports/tableau_public_review.md) verifies both threshold states in a signed-out desktop browser. The preserved [authoring checkpoint 03](../tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) predates the later presentation edits; its embedded-data audit remains available.
 
 ## First checkpoint: connect one small source
 

@@ -2,11 +2,13 @@
 
 **A data analysis project by John Heerema**
 
+**[Explore the interactive Tableau dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes)** · [Read the findings](reports/morning_evening.md) · [Published-view review](reports/tableau_public_review.md)
+
 For a given destination, how does flight reliability vary by airline, departure time, and season—and which patterns are dependable enough to inform planning?
 
-**Status:** The analysis and three-view Tableau dashboard are verified. One 15/60-minute selector controls the overall rates, gap/interval card, and eight destination comparisons. The dashboard includes source, coverage, methods, and interpretation notes. Tableau Public publication and final presentation review are next.
+**Status:** The three-view dashboard is published on Tableau Public. A signed-out desktop browser review confirmed the opening 15-minute view, live switching to 60 minutes, both sets of headline values, all eight destination gaps, dynamic titles, the revised axis label, and the interpretation/source notes. One shared selector controls all three views.
 
-**Current Tableau checkpoint:** [Download the packaged workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) or read the [data and configuration audit](reports/tableau_checkpoint_03.md).
+**Audited authoring checkpoint 03:** [Download the packaged workbook](tableau/checkpoints/LAX_Flight_Reliability_Checkpoint_03.twbx) or read the [data and configuration audit](reports/tableau_checkpoint_03.md). This preserved checkpoint predates the published font, axis-title, and explanatory-note updates; the [published-view review](reports/tableau_public_review.md) records the later presentation changes. Archiving the final packaged revision remains a separate step.
 
 **Visualization platform:** The dashboard is built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
 
@@ -89,7 +91,8 @@ Historical patterns describe associations. They do not establish that changing a
 - [x] Author and verify the first native Tableau worksheet with a 15/60-minute selector.
 - [x] Combine the rates and live gap/interval summary into a verified Tableau overview dashboard.
 - [x] Add destination gaps, adjusted intervals, and source/methods notes; verify both thresholds.
-- [ ] Publish the Tableau dashboard and complete its presentation review.
+- [x] Publish the Tableau dashboard and verify its presentation and selector in a desktop browser.
+- [ ] Archive the final packaged workbook matching the published presentation.
 - [ ] Add reproduction instructions and complete the final review.
 
 ## Planned deliverables
