@@ -1,195 +1,80 @@
 # LAX Flight Reliability
 
-**A data analysis project by John Heerema**
+**A data analysis portfolio project by John Heerema · Python, SQL, and Tableau**
 
-**[Explore the interactive Tableau dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes)** · [Read the findings](reports/morning_evening.md) · [Published-view review](reports/tableau_public_review.md)
+[Explore the interactive dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes) · [Read the analysis](reports/morning_evening.md) · [Download the final Tableau workbook](tableau/LAX_Flight_Reliability_Final.twbx)
 
-Were LAX morning flights more reliable than evening flights in 2025, after comparing the same airline, destination, and month mix?
+An analysis of **190,472 reported domestic LAX departures in 2025**, asking whether morning and evening flights had different disruption rates after comparing the same airline, destination, and month mix. The result is a published Tableau dashboard backed by reproducible analysis and documented checks.
 
-**Status:** The three-view dashboard is published on Tableau Public. A signed-out desktop browser review confirmed the opening 15-minute view, live switching to 60 minutes, both sets of headline values, all eight destination gaps, dynamic titles, the revised axis label, and the interpretation/source notes. One shared selector controls all three views.
+## Main findings
 
-**Final Tableau workbook:** [Download the packaged workbook](tableau/LAX_Flight_Reliability_Final.twbx) or read its [data and configuration audit](reports/tableau_final.md). All **2,062 embedded values** agree with the validated CSVs. The archive includes the published font, axis-title, explanatory-note, and opening-filter settings. The earlier [authoring checkpoint 03](reports/tableau_checkpoint_03.md) remains preserved.
+**Evening departures had higher disruption rates in the matched historical comparison.**
 
-**Visualization platform:** The dashboard is built in **Tableau**. Validated [Tableau CSV sources](docs/tableau_data_guide.md) now support overall results, destination comparisons, and correctly weighted filtered views.
+| Arrival-delay threshold | Morning | Evening | Evening minus morning | Approx. 95% model-based interval for the gap |
+| --- | ---: | ---: | ---: | --- |
+| 15 minutes — primary analysis | 11.99% | 21.36% | **9.37 percentage points** | 8.34–10.39 percentage points |
+| 60 minutes — exploratory follow-up | 4.42% | 8.01% | **3.59 percentage points** | 2.96–4.23 percentage points |
 
-**First finding:** In comparable 2025 airline/destination/month groups, the disruption rate was **11.99%** for morning departures versus **21.36%** for evening departures: a **9.37-percentage-point gap** (approximate 95% week-cluster interval: **8.34–10.39 points**).
+Both definitions also count cancellations and diversions as disruptions. Both use the same **57,464 matched scheduled flights**, covering **64.2% of flights in the selected departure windows**.
 
-Disruption means cancellation, diversion, or arrival at least 15 minutes late. The comparison covers **57,464 flights**, or **64.2% of flights in the selected windows**. It describes a historical association, not a causal effect or future-flight forecast.
+At the 15-minute threshold, the gap corresponds to approximately **9 additional disruptions per 100 comparable evening departures relative to morning departures**. Positive gaps also appeared in all 12 descriptive monthly comparisons. These are historical associations; the project does not establish a causal departure-time effect or forecast future flights.
 
-Read the [comparison and sensitivity checks](reports/morning_evening.md), including the [plan committed before the estimates](docs/morning_evening_plan.md).
+![Common-mix disruption rates and monthly gaps](reports/figures/morning_evening.svg)
 
-![Matched morning and evening flight reliability](reports/figures/morning_evening.svg)
+## Question and approach
 
-**Dataset checkpoint:** [190,472 LAX departures across all 365 days](reports/year_2025.md), with 12 reporting airline codes and 105 destination airports. Every month and the combined year pass the record checks. Four comparisons match published DOT figures, including national annual totals and December LAX departures.
+**Were morning departures more reliable after accounting for the airline, destination, and month mix?**
 
-**First checkpoint:** Read the [January pilot inspection](reports/pilot_2025_01.md) and explore [12 example flight records](data/samples/lax_2025_01_examples.csv). The pilot preserves cancellations and diversions and checks Python calculations against SQL. These are one-month observations; full-year recommendations will follow validated analysis.
+Different flight mixes can affect a simple morning-versus-evening average. This project makes the comparison within supported groups and applies the same mix to both windows:
 
-**Data rules:** [How records, missing values, and metric denominators will be handled](docs/data_handling.md). These rules were documented before downloading the remaining months.
+1. **Define the windows:** scheduled departures at 06:00–09:59 and 17:00–20:59, in LAX local time.
+2. **Retain comparable groups:** the same reporting operating-carrier DOT ID, destination airport ID, and month, with at least 10 scheduled flights in each window. The primary comparison retains 706 groups.
+3. **Standardize the mix:** calculate rates within each group, then weight both windows by the group's combined scheduled flight count.
+4. **Assess uncertainty and robustness:** use approximate weekly-cluster intervals, examine predeclared sensitivity checks, and extend to the 60-minute definition and destination comparisons.
 
-## Purpose
+The [primary plan](docs/morning_evening_plan.md) was committed before calculating its outcome comparisons. The destination/severity follow-up is exploratory; its [separate plan](docs/route_severity_plan.md) was committed before estimating the extension results. Destination intervals account for 62 supported destination/threshold comparisons.
 
-Help travelers and operations planners understand historical disruption risk when comparing flights from Los Angeles International Airport (LAX).
+The dashboard shows overall rates, the gap and its interval, and eight destinations selected by matched flight count. It supports a historical reliability review for travelers and operations planners.
 
-The project connects logistics planning with data analysis: define a useful question, check the evidence, compare realistic options, and explain the tradeoffs.
+## Skills demonstrated
 
-## Data and scope
-
-| Item | Planned scope |
+| Area | Evidence in the project |
 | --- | --- |
-| Source | U.S. Department of Transportation, Bureau of Transportation Statistics (BTS) |
-| Dataset | Reporting Carrier On-Time Performance (1987–present) |
-| Period | January 1–December 31, 2025 |
-| Flights | Reported nonstop domestic flights scheduled to depart LAX |
-| Unit of analysis | One reported scheduled flight occurrence, including cancellations and diversions |
-| Comparisons | Destination, reporting airline, scheduled departure time, and month |
+| Python and data quality | Chunked ingestion of official monthly files; checks for schema, dates, duplicate identifiers, outcome flags, and missing values. [Dataset validation](reports/year_2025.md) |
+| SQL verification | Separate queries reconstruct time windows, outcomes, matched cohorts, and weighted point estimates. [SQL queries](sql) |
+| Statistical comparison | Common-mix standardization, weekly-cluster uncertainty, sensitivity checks, and adjusted destination intervals. [Analysis](reports/morning_evening.md) |
+| Tableau | Separate source grains, a shared 15/60-minute filter, live field inserts, correct percentage-point units, and synchronized dot/interval views. [Data guide](docs/tableau_data_guide.md) |
+| Reproducibility | Pinned dependencies, source manifests and checksums, frozen analysis plans, tests, and packaged-workbook audits. [Reproduction guide](docs/reproduce.md) |
 
-BTS reporting coverage determines which carriers and flights appear. This analysis describes the selected dataset; it does not cover international flights or every airline.
+## Validation and deliverables
 
-Source documentation:
+- **Source data:** all 12 months and the full year pass the recorded data checks; four calculations match published DOT benchmarks. [Validation report](reports/year_2025.md)
+- **Analysis:** independent SQL point estimates agree with Python within an absolute tolerance of 1e-12. [Primary checks](reports/morning_evening.md#checks-supporting-this-result) · [Extension checks](reports/route_severity.md#checks-and-provenance)
+- **Tableau archive:** all 2,062 embedded values match the validated CSVs; the final archive passes 82 data/configuration checks. The final validation records 61 passing project tests. [Final audit](reports/tableau_final.md)
+- **Published interface:** both threshold states, displayed results, dynamic titles, colors, and notes were checked in a signed-out desktop browser. [Desktop review](reports/tableau_public_review.md)
 
-- [Dataset overview](https://www.transtats.bts.gov/TableInfo.asp?QO_fu146_anzr=b0-gvzr&gnoyr_VQ=FGJ)
-- [Field definitions](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ)
-- [BTS explanation of on-time performance](https://www.bts.gov/explore-topics-and-geography/topics/airline-time-performance-and-causes-flight-delays)
+The [Tableau-ready CSVs and dictionary](data/tableau), [full destination/severity report](reports/route_severity.md), and [earlier workbook checkpoints](tableau/checkpoints) are included for further inspection.
 
-## Measures
+## Reproduce
 
-| Measure | Definition |
-| --- | --- |
-| Flight count | Number of reported scheduled flights in the selected group |
-| Cancellation rate | Canceled flights divided by all reported scheduled flights in that group |
-| Diversion rate | Diverted flights divided by all reported scheduled flights in that group |
-| Arrival delay rate | Flights arriving at least 15 minutes late divided by completed, nondiverted flights with a recorded arrival delay |
-| 90th percentile arrival delay | A measure of longer delays: the value at or below which 90% of eligible arrival-delay observations fall; early arrivals count as zero minutes late |
-| Arrival disruption, first comparison | Cancellation, diversion, or completed arrival at least 15 minutes late, divided by scheduled flights in the selected comparison group |
-
-Arrival-delay measures exclude canceled and diverted flights. Their rates will be shown alongside arrival delays, and missing arrival records will be reported separately. Each result will state its sample size and denominator.
-
-These definitions have been checked on each month and on the full-year dataset. Any later changes will be documented before interpreting comparisons.
-
-## How results will be validated
-
-- Check the downloaded months, date range, LAX filter, required columns, and possible duplicate flight records.
-- Inspect missing values and investigate unusual records before deciding how to handle them.
-- Keep cancellations and diversions visible rather than replacing missing arrival times with zero.
-- Compare airlines serving the same destination and comparable periods; examine differences in departure-time mix.
-- Show flight counts and uncertainty so small samples do not dominate rankings.
-- Check whether patterns persist across months. If a predictive model is added, evaluate it on later dates kept separate from model development.
-- Reconcile selected results with BTS summaries using matching coverage and metric definitions, and explain any differences.
-- Preserve source references, download dates, and runnable analysis so results can be reproduced.
-
-Historical patterns describe associations. They do not establish that changing an airline or departure time causes an improvement, and they do not guarantee future flight performance.
-
-## Roadmap
-
-- [x] Create the repository and define the project.
-- [x] Download one month as a pilot and inspect the records.
-- [x] Document data-handling rules before extending to the full year.
-- [x] Build and validate the full-year LAX dataset.
-- [x] Complete the first matched reliability comparison and sensitivity checks.
-- [x] Explore destination differences and the 60-minute delay threshold.
-- [x] Prepare validated Tableau sources with documented row grains and calculations.
-- [x] Author and verify the first native Tableau worksheet with a 15/60-minute selector.
-- [x] Combine the rates and live gap/interval summary into a verified Tableau overview dashboard.
-- [x] Add destination gaps, adjusted intervals, and source/methods notes; verify both thresholds.
-- [x] Publish the Tableau dashboard and verify its presentation and selector in a desktop browser.
-- [x] Archive and audit the final packaged workbook with the published presentation updates.
-- [ ] Add reproduction instructions and complete the final review.
-
-## Planned deliverables
-
-- Documented Python and SQL analysis.
-- A data dictionary and a report of data-quality checks.
-- An interactive dashboard for comparing historical reliability.
-- A short report with supported recommendations and limitations.
-- Instructions for reproducing the published results.
-
-## Run the January pilot
-
-Use Python 3.12. From a local copy of this repository:
+Use Python 3.12. From the repository root, check the packaged data and run the tests without downloading the raw flight archives:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python scripts/inspect_pilot.py
-```
-
-The activation command above is for macOS/Linux. On Windows, activate the environment with `.venv\Scripts\activate`.
-
-The script downloads the original 27 MB BTS ZIP, reads the national CSV in chunks, retains LAX departures, and writes a local extract to `data/interim/`. It regenerates the pilot report, JSON profile, and illustrative records. Original archives and full extracts stay outside Git; the [source manifest](data/manifests/pilot_2025_01.json) records the download and checksum.
-
-After the first download, repeat the inspection without network access:
-
-```bash
-python scripts/inspect_pilot.py --offline
-```
-
-Run the focused calendar, filtering, denominator, source-integrity, and reference-matching tests:
-
-```bash
+python -m pip install -r requirements.txt -r requirements-tableau.txt
 python -m unittest discover -s tests -v
-```
-
-## Build the full-year dataset
-
-With the same environment and requirements, run from the repository root:
-
-```bash
-python -m scripts.build_year
-```
-
-The first run downloads about 355 MB of official monthly ZIPs. The files are read in chunks, and the combined LAX extract is saved locally as `data/interim/lax_2025.csv`. Source checksums, timestamps, and the extract checksum are recorded in the [year manifest](data/manifests/year_2025.json).
-
-To reproduce the build from cached archives:
-
-```bash
-python -m scripts.build_year --offline
-```
-
-The command regenerates the [validation report](reports/year_2025.md), [JSON audit](reports/year_2025.json), [monthly summary](data/summary/2025_monthly.csv), and [carrier exposure table](data/summary/2025_carrier_month_counts.csv). A [standalone SQL query](sql/monthly_validation.sql) cross-checks monthly counts, and [documented DOT benchmarks](data/reference/dot_2025_benchmarks.json) provide checks against published totals. A failed data or reconciliation check stops the build before published outputs are replaced.
-
-## Reproduce the first comparison
-
-After building the validated year extract, update the pinned requirements and run:
-
-```bash
-python -m pip install -r requirements.txt
-python -m scripts.compare_departure_windows
-python -m unittest discover -s tests -v
-```
-
-The analysis verifies the input checksum, applies the precommitted protocol, checks Python's primary result with separate SQL, and regenerates the [report](reports/morning_evening.md), [JSON audit](reports/morning_evening.json), [matched group table](data/summary/morning_evening_pairs.csv), [monthly results](data/summary/morning_evening_monthly.csv), [sensitivity results](data/summary/morning_evening_sensitivity.csv), and standalone SVG figure.
-
-## Prepare the Tableau sources
-
-The [destination/severity follow-up](reports/route_severity.md) compares the 15- and 60-minute definitions on the same matched flights and labels destination coverage and uncertainty. Its [plan](docs/route_severity_plan.md) was committed before the extension estimates.
-
-```bash
-python -m scripts.route_severity
-```
-
-The command regenerates the [overall](data/tableau/overall_comparison_2025.csv), [destination](data/tableau/destination_comparison_2025.csv), and [pair-level](data/tableau/comparison_pairs_2025.csv) CSVs, their [dictionary](data/tableau/data_dictionary.csv), a [checksum manifest](data/manifests/tableau_sources_2025.json), and the [follow-up audit](reports/route_severity.json). The [Tableau guide](docs/tableau_data_guide.md) starts with one small connection and documents the correct aggregation rules.
-
-## Inspect the native Tableau checkpoint
-
-The [final three-view workbook](tableau/LAX_Flight_Reliability_Final.twbx) contains the overall comparison, a live gap/interval card, and destination gaps with adjusted intervals. Its [audit](reports/tableau_final.md) verifies both embedded datasets, cross-source filter mapping, live values, interval geometry, units, colors, the Arial title setting, interpretation note, and saved desktop layout. All **2,062 embedded values** agree with the validated CSVs. The earlier [single-worksheet](reports/tableau_checkpoint_01.md), [two-view overview](reports/tableau_checkpoint_02.md), and [three-view authoring](reports/tableau_checkpoint_03.md) checkpoints remain available.
-
-To repeat the latest inspection without downloading the raw flight archives:
-
-```bash
-python -m pip install -r requirements-tableau.txt
 python -m scripts.inspect_tableau_workbook --workbook tableau/LAX_Flight_Reliability_Final.twbx
-python -m unittest discover -s tests -p test_tableau_checkpoint.py -v
 ```
 
-The command regenerates the [final JSON audit](reports/tableau_final.json). The final filename selects the final-presentation checks automatically; use `--final` to enforce those checks on a renamed copy. Inspection queries temporary copies of the embedded extracts and leaves the packaged workbook unchanged. The [public desktop review](reports/tableau_public_review.md) separately exercised live switching at both thresholds. The native desktop dashboard uses automatic sizing. Other viewport sizes and the auto-generated phone layout still need visual review.
+The [full reproduction guide](docs/reproduce.md) covers environment setup, the BTS download/build, primary analysis, Tableau-source exports, and offline repetition. Raw archives and the full flight-level extract remain outside Git; manifests preserve their provenance.
 
-Regression checks include the authoring bug where a shared 15-minute selection conflicted with a local 60-minute filter and removed the destination marks. The current workbook uses one shared threshold group mapped across the two sources, with no competing local threshold filter. Earlier checkpoints can be inspected by passing their paths to the same command.
+## Source and limits
 
-## AI assistance
+Source: [U.S. DOT/BTS Reporting Carrier On-Time Performance](https://www.transtats.bts.gov/TableInfo.asp?QO_fu146_anzr=b0-gvzr&gnoyr_VQ=FGJ), January–December 2025, reported domestic flights scheduled to depart LAX.
 
-AI assists with code drafting, debugging, analysis ideas, and explanations. Every published finding must trace to source data, executed code, and documented checks. Methods and conclusions will be reviewed as the project develops.
+The matched result covers supported comparisons within the selected windows. Other flights and routes may differ, and unmeasured factors can still affect the association. The intervals describe conditional model-based operational variability; they are not future-flight prediction intervals. The desktop dashboard was reviewed; mobile layouts and full accessibility compliance remain outside that review.
 
-## License
+## Authorship and AI assistance
 
-Project code is available under the [MIT License](LICENSE). BTS remains the source of the flight data; this project does not relicense the source data.
+Created by **John Heerema** with AI assistance for code drafting, debugging, analysis ideas, and explanations. Published findings trace to source data, executed Python/SQL checks, and documented limitations.
+
+Project code uses the [MIT License](LICENSE). BTS remains the source of the flight data.
