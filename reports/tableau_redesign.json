@@ -1,0 +1,213 @@
+{
+  "status": "candidate_not_published",
+  "workbook": "LAX_Flight_Reliability_Redesigned.twbx",
+  "workbook_sha256": "46cb15881c485c6d083205731e43c85d59725572a06a77da97567a079cdc1853",
+  "baseline_workbook_sha256": "9c8650d76736c74eab711730f3216d1656153dfd486079836d3d2fa7c6142562",
+  "baseline_checks_passed": 82,
+  "embedded_values_covered_by_byte_identity": 2062,
+  "checks": [
+    {
+      "check": "Baseline final archive agrees with its pinned audit",
+      "passed": true
+    },
+    {
+      "check": "Redesigned package ZIP integrity passes",
+      "passed": true
+    },
+    {
+      "check": "Redesigned package contains one workbook and both extracts",
+      "passed": true
+    },
+    {
+      "check": "Both redesigned extracts are byte-identical to the fully audited originals",
+      "passed": true
+    },
+    {
+      "check": "All three original worksheet identities remain",
+      "passed": true
+    },
+    {
+      "check": "Source identities and physical data connections are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Cross-source threshold relationship is unchanged",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps: comparison filters are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps: row and column field bindings are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps: existing aggregation instances are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Destination Gaps: title retains the live shared threshold",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary: comparison filters are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary: row and column field bindings are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary: existing aggregation instances are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Gap Summary: title retains the live shared threshold",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability: comparison filters are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability: row and column field bindings are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability: existing aggregation instances are unchanged",
+      "passed": true
+    },
+    {
+      "check": "Overall Reliability: title retains the live shared threshold",
+      "passed": true
+    },
+    {
+      "check": "All analytical calculations remain unchanged",
+      "passed": true
+    },
+    {
+      "check": "overall_comparison_2025: original color mappings remain unchanged",
+      "passed": true
+    },
+    {
+      "check": "destination_comparison_2025: original color mappings remain unchanged",
+      "passed": true
+    },
+    {
+      "check": "All explicit gap defaults use number formatting",
+      "passed": true
+    },
+    {
+      "check": "Overall bars retain their validated percentage axis",
+      "passed": true
+    },
+    {
+      "check": "Overall rate comparison explains the shared airline, destination, and month mix",
+      "passed": true
+    },
+    {
+      "check": "Gap card retains all three live text-field encodings",
+      "passed": true
+    },
+    {
+      "check": "Gap and both bounds retain effective two-decimal numeric formats",
+      "passed": true
+    },
+    {
+      "check": "Plain-language gap resolves correctly at 15 minutes",
+      "passed": true
+    },
+    {
+      "check": "Plain-language gap resolves correctly at 60 minutes",
+      "passed": true
+    },
+    {
+      "check": "Destination city labels agree with the pinned CSV without replacing raw codes",
+      "passed": true
+    },
+    {
+      "check": "Destination rows sort by descending MIN gap",
+      "passed": true
+    },
+    {
+      "check": "Both destination axes use one fixed -6 to 24 scale",
+      "passed": true
+    },
+    {
+      "check": "Destination secondary axis stays synchronized",
+      "passed": true
+    },
+    {
+      "check": "Fixed scale includes every displayed interval endpoint at both thresholds",
+      "passed": true
+    },
+    {
+      "check": "Destination layer all: geometry and direction bindings stay unchanged",
+      "passed": true
+    },
+    {
+      "check": "Destination layer 1: geometry and direction bindings stay unchanged",
+      "passed": true
+    },
+    {
+      "check": "Destination layer 2: geometry and direction bindings stay unchanged",
+      "passed": true
+    },
+    {
+      "check": "Detailed tooltip includes gap, bounds, rates, counts, and adjustment scope",
+      "passed": true
+    },
+    {
+      "check": "Stale worksheet annotations are removed",
+      "passed": true
+    },
+    {
+      "check": "Original dashboard name is retained",
+      "passed": true
+    },
+    {
+      "check": "Desktop canvas is fixed at 1200 by 900",
+      "passed": true
+    },
+    {
+      "check": "Every visible zone is inside the canvas",
+      "passed": true
+    },
+    {
+      "check": "Top-level content rectangles do not overlap",
+      "passed": true
+    },
+    {
+      "check": "All three views remain visible in the dashboard",
+      "passed": true
+    },
+    {
+      "check": "Shared threshold is a single-choice control with All hidden",
+      "passed": true
+    },
+    {
+      "check": "Interpretation and source/coverage notes remain visible",
+      "passed": true
+    },
+    {
+      "check": "All formatted text uses Arial",
+      "passed": true
+    },
+    {
+      "check": "Inspection leaves both workbooks unchanged",
+      "passed": true
+    }
+  ],
+  "gap_label_examples": [
+    {
+      "threshold_minutes": 15,
+      "label": "9.37 more\nevening disruptions per 100\ncomparable flights\n\nApprox. 95% model interval: 8.34 to 10.39 per 100"
+    },
+    {
+      "threshold_minutes": 60,
+      "label": "3.59 more\nevening disruptions per 100\ncomparable flights\n\nApprox. 95% model interval: 2.96 to 4.23 per 100"
+    }
+  ],
+  "scope": "The original archive is freshly audited with embedded SQL; both candidate extracts are byte-identical. Candidate configuration, field bindings, bounds, and geometry are checked. The redesigned workbook has not been opened/rendered in Tableau: live web authoring stalled before any publication. The supplied PNG is a data-driven layout preview, not a Tableau screenshot."
+}
