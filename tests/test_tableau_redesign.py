@@ -7,6 +7,23 @@ import unittest
 from xml.etree import ElementTree as ET
 import zipfile
 
+from scripts.redesign_tableau_workbook import formatted, MUTED
+
+
+class FormattedTextOrderTests(unittest.TestCase):
+    def test_insert_and_replacement_keep_text_before_zone_style(self):
+        for existing in [False, True]:
+            with self.subTest(existing_text=existing):
+                parent = ET.Element("zone")
+                if existing:
+                    ET.SubElement(parent, "formatted-text")
+                style = ET.SubElement(parent, "zone-style")
+                formatted(parent, [("Updated note", 10, MUTED, False)])
+                self.assertEqual([child.tag for child in parent], ["formatted-text", "zone-style"])
+                self.assertIs(parent[1], style)
+                self.assertEqual(parent.findtext("./formatted-text/run"), "Updated note")
+
+
 HAS_HYPER=importlib.util.find_spec("tableauhyperapi") is not None
 if HAS_HYPER:
     from scripts.inspect_tableau_redesign import inspect
@@ -32,6 +49,16 @@ class RedesignFailureTests(unittest.TestCase):
                 node.set('member','60')
             with self.assertRaisesRegex(ValueError,'comparison filters are unchanged'):
                 inspect(self.altered(directory,change))
+
+    def test_text_after_zone_style_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            def change(root):
+                node = root.find("./dashboards/dashboard/zones/zone/zone[@id='22']")
+                label = node.find("./formatted-text")
+                node.remove(label)
+                node.append(label)
+            with self.assertRaisesRegex(ValueError, "Formatted text precedes"):
+                inspect(self.altered(directory, change))
 
     def test_scale_that_clips_intervals_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:

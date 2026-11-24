@@ -34,7 +34,9 @@ def formatted(parent, entries):
     node = parent.find("./formatted-text")
     if node is not None:
         parent.remove(node)
-    node = ET.SubElement(parent, "formatted-text")
+    # Tableau requires formatted-text before layout-cache/zone-style children.
+    node = ET.Element("formatted-text")
+    parent.insert(0, node)
     for value, size, color, bold in entries:
         run(node, value, size, color, bold)
     return node

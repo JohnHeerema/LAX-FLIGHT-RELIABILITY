@@ -4,7 +4,7 @@
 
 [Explore the interactive dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview?publish=yes) · [Read the analysis](reports/morning_evening.md) · [Download the final Tableau workbook](tableau/LAX_Flight_Reliability_Final.twbx)
 
-**On this branch:** an [unpublished dashboard redesign candidate](docs/dashboard_redesign.md), with an editable workbook, previews for both cutoffs, and 48 configuration checks. Its native Tableau rendering still needs to be checked; the public link above remains the existing version.
+**On this branch:** an [unpublished dashboard redesign candidate](docs/dashboard_redesign.md), with an editable workbook, previews for both cutoffs, and 49 configuration checks. The text-order loading error reported on November 24 has been repaired; opening and rendering the corrected workbook in Tableau still need to be confirmed. The public link above remains the existing version.
 
 An analysis of **190,472 reported domestic LAX departures in 2025**, asking whether morning and evening flights had different disruption rates after comparing the same airline, destination, and month mix. The result is a published Tableau dashboard backed by reproducible analysis and documented checks.
 

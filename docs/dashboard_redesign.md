@@ -4,6 +4,8 @@
 
 The [current public dashboard](https://public.tableau.com/app/profile/john.heerema/viz/LAXFlightReliabilityMorningvs_Evening2025/LAXReliabilityOverview) remains the published version. The web editor stalled before publication. The candidate below was produced by editing the native workbook XML; its configuration checks do not establish that Tableau will render every change correctly.
 
+**November 24 loading repair:** the first candidate was rejected by Tableau with error `D2E8DA72`: a `formatted-text` element appeared after `zone-style`. Tableau requires text before the layout/style children in a dashboard zone. The builder now inserts text first, and the workbook has been rebuilt. Regression checks cover insertion, replacement, and rejection of the previous invalid ordering. A successful Tableau open/render of the corrected file still needs confirmation.
+
 [Download the redesigned packaged workbook](../tableau/LAX_Flight_Reliability_Redesigned.twbx) · [Configuration audit](../reports/tableau_redesign.json)
 
 ## What changed
@@ -32,9 +34,9 @@ These PNGs are drawn from the validated Tableau CSVs using Matplotlib. They illu
 
 ## Verification completed
 
-The candidate passes **48 data/configuration checks**, including preserved source connections, calculations, filters, aggregations, threshold mappings, units, live text bindings, city aliases, color mappings, and interval bounds. The original final archive was freshly rechecked against its pinned **82-check** audit.
+The candidate passes **49 data/configuration checks**, including required text ordering, preserved source connections, calculations, filters, aggregations, threshold mappings, units, live text bindings, city aliases, color mappings, and interval bounds. The original final archive was freshly rechecked against its pinned **82-check** audit.
 
-Both embedded Hyper extracts are byte-identical to the verified original, preserving all **2,062 embedded values**. The analysis, canonical CSVs, original final workbook, and previous audits were not modified. The complete project test suite passes **64 tests**, including three deliberate-failure checks for altered extract bytes, conflicting cutoffs, and clipped intervals.
+Both embedded Hyper extracts are byte-identical to the verified original, preserving all **2,062 embedded values**. The analysis, canonical CSVs, original final workbook, and previous audits were not modified. The complete project test suite passes **66 tests**, including deliberate-failure checks for altered extract bytes, conflicting cutoffs, clipped intervals, and invalid text ordering.
 
 These checks verify data and saved configuration. They do not replace a native Tableau open/render check, live tooltip inspection, or testing the shared filter after Tableau loads the candidate.
 

@@ -52,6 +52,9 @@ def inspect(workbook=OUTPUT):
         old = ET.fromstring(original.read(next(name for name in original.namelist() if name.endswith(".twb"))))
         new = ET.fromstring(redesigned.read(xml[0]))
     old_sheets = {s.get("name"): s for s in old.findall("./worksheets/worksheet")}
+    check("Formatted text precedes layout and style children", all(
+        list(parent)[0].tag == "formatted-text" for parent in new.iter()
+        if parent.find("./formatted-text") is not None))
     sheets = {s.get("name"): s for s in new.findall("./worksheets/worksheet")}
     check("All three original worksheet identities remain", set(sheets) == set(old_sheets) and len(sheets) == 3)
     sources = {s.get("caption"): s for s in new.findall("./datasources/datasource")}
@@ -134,7 +137,7 @@ def inspect(workbook=OUTPUT):
     return {"status":"candidate_not_published", "workbook":workbook.name, "workbook_sha256":before,
             "baseline_workbook_sha256":baseline["workbook_sha256"],"baseline_checks_passed":len(baseline["checks"]),
             "embedded_values_covered_by_byte_identity":baseline["embedded_values_compared"],"checks":checks,
-            "gap_label_examples":examples,"scope":"The original archive is freshly audited with embedded SQL; both candidate extracts are byte-identical. Candidate configuration, field bindings, bounds, and geometry are checked. The redesigned workbook has not been opened/rendered in Tableau: live web authoring stalled before any publication. The supplied PNG is a data-driven layout preview, not a Tableau screenshot."}
+            "gap_label_examples":examples,"scope":"The original archive is freshly audited with embedded SQL; both candidate extracts are byte-identical. Candidate configuration, field bindings, bounds, geometry, and formatted-text child order are checked. The initial candidate failed a native Tableau open with D2E8DA72 because formatted-text followed zone-style. That ordering is repaired; the corrected workbook has not yet been confirmed to open/render in Tableau. The supplied PNG is a data-driven layout preview, not a Tableau screenshot."}
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 {
   "status": "candidate_not_published",
   "workbook": "LAX_Flight_Reliability_Redesigned.twbx",
-  "workbook_sha256": "46cb15881c485c6d083205731e43c85d59725572a06a77da97567a079cdc1853",
+  "workbook_sha256": "bfbf7dc10ff9330071f1aadcc19428107a6fa3690508711b9ace0b6d3885edde",
   "baseline_workbook_sha256": "9c8650d76736c74eab711730f3216d1656153dfd486079836d3d2fa7c6142562",
   "baseline_checks_passed": 82,
   "embedded_values_covered_by_byte_identity": 2062,
@@ -20,6 +20,10 @@
     },
     {
       "check": "Both redesigned extracts are byte-identical to the fully audited originals",
+      "passed": true
+    },
+    {
+      "check": "Formatted text precedes layout and style children",
       "passed": true
     },
     {
@@ -209,5 +213,5 @@
       "label": "3.59 more\nevening disruptions per 100\ncomparable flights\n\nApprox. 95% model interval: 2.96 to 4.23 per 100"
     }
   ],
-  "scope": "The original archive is freshly audited with embedded SQL; both candidate extracts are byte-identical. Candidate configuration, field bindings, bounds, and geometry are checked. The redesigned workbook has not been opened/rendered in Tableau: live web authoring stalled before any publication. The supplied PNG is a data-driven layout preview, not a Tableau screenshot."
+  "scope": "The original archive is freshly audited with embedded SQL; both candidate extracts are byte-identical. Candidate configuration, field bindings, bounds, geometry, and formatted-text child order are checked. The initial candidate failed a native Tableau open with D2E8DA72 because formatted-text followed zone-style. That ordering is repaired; the corrected workbook has not yet been confirmed to open/render in Tableau. The supplied PNG is a data-driven layout preview, not a Tableau screenshot."
 }
